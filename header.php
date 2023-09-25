@@ -10,4 +10,3 @@
         <?php wp_head(); ?>
     </head>
     <body>
-        <?php get_header(); ?>

@@ -10,7 +10,6 @@
         <?php wp_head(); ?>
     </head>
     <body>
-        <header>
             <a href="<?php echo esc_url(home_url('/')); ?>" rel="home">
 	            <?php
 		        $image = wp_get_attachment_image_src(attachment_url_to_postid(get_theme_mod('wpc_logo')) , 'full'); 
@@ -20,4 +19,3 @@
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>">
             <?php wp_nav_menu(['theme_location' => 'main-menu',]); ?>
             </nav>
-        </header>

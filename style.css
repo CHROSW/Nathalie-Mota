@@ -9,6 +9,99 @@ Tags : openclassrooms
 Text Domain : Nathalie Mota
 */ 
 
+h1, h2, h3{
+    font-family: 'Space Mono';
+}
+p{
+    font-family: 'poppins', sans-serif;
+}
+
+.header{
+    width: 1440px;
+    height: 80px;
+    margin: auto;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header a img{
+    width:216px;
+    height:14px;
+    padding-left: 146px;
+}
+.menu{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:304px;
+    margin-right: 146px;
+    padding-left: 0px;
+}
+
+.menu li{
+    list-style: none;
+}
+
+.menu li a{
+    font-family: 'Space Mono';
+    text-decoration: none;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    text-transform: uppercase;
+    color:black;
+}
+
+.menu li a:hover{
+    font-weight: 800;
+}
+
+.single-photo{
+    width: 1440px;
+    display: flex;
+    flex-direction: row;
+    justify-content:center;
+    margin: auto;
+}
+
+.single-photo img{
+    width:563px;
+    height:844px;
+    object-fit: cover;
+    margin: 38px 146px 8px 0px;
+}
+
+.single-photo-text{
+    width:564px;
+    border-bottom: solid black 1px;
+    margin: 525px 21px 8px 146px;
+}
+
+.single-photo-text h1{
+    width: 420px;
+    font-size: 66px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 58px;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.single-photo-text p{
+    font-family: 'Space Mono';
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

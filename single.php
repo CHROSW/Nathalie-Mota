@@ -15,18 +15,19 @@ get_header();
 while ( have_posts() ) :
 	the_post();
 	echo "<article id='post-" . get_the_ID() . "' >";
-	echo "<div>";
+	echo "<div class='single-photo'>";
+	echo "<div class='single-photo-text'>";
 	the_title('<h1>','</h1>');
-	echo "<p>";
-	echo "<span>Référence</span>:<span>" . '' . "</span>";
-	echo "<span>Catégorie</span>:<span>" . '' . "</span>";
-	echo "<span>Format</span>:<span>" . '' . "</span>";
-	echo "<span>Type</span>:<span>" . '' . "</span>";
-	echo "<span>Année</span>:<span>" . '' . "</span>";
-	echo "</p>";
+	echo "<p>Référence<span>:</span>" . '' . "</p>";
+	echo "<p>Catégorie<span>:</span>" . '' . "</p>";
+	echo "<p>Format<span>:</span>" . '' . "</p>";
+	echo "<p>Type<span>:</span>" . '' . "</p>";
+	echo "<p>Année<span>:</span>" . '' . "</p>";
+	echo "</div>";
+	echo get_the_post_thumbnail(get_the_ID(), 'large');
 	echo "</div>";
 	/*the_post_thumbnail();*/
-	echo get_the_post_thumbnail(get_the_ID(), 'large');
+	
 
 	if ( is_attachment() ) {
 		//Parent post navigation.
@@ -44,19 +45,13 @@ while ( have_posts() ) :
 	}
 
 	// Previous/next post navigation.
-	/*$twentytwentyone_next = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' );
-	$twentytwentyone_prev = is_rtl() ? twenty_twenty_one_get_icon_svg( 'ui', 'arrow_right' ) : twenty_twenty_one_get_icon_svg( 'ui', 'arrow_left' );
-	
-	$twentytwentyone_next_label     = esc_html__( 'Next post', 'twentytwentyone' );
-	$twentytwentyone_previous_label = esc_html__( 'Previous post', 'twentytwentyone' );*/
-
 	echo "<div>";
 	echo "<p>Cette photo vous intéresse ?</p>";
 	echo get_the_post_thumbnail(get_next_post(), 'thumbnail');
 	the_post_navigation(
 		array(
-			'next_text' => '<p class="meta-nav">' .  /*$twentytwentyone_next .*/ '</p><p class="post-title">%title</p>',
-			'prev_text' => '<p class="meta-nav">' . /*$twentytwentyone_prev .*/  '</p><p class="post-title">%title</p>',
+			'next_text' => '<p class="meta-nav"><img src="' . get_template_directory_uri() . '/images/Line 7.png" alt="next"/></p>',
+			'prev_text' => '<p class="meta-nav"><img src="'. get_template_directory_uri() . '/images/Line 6.png" alt="previous"/></p>',
 		)
 	);
 	echo "</div>";

@@ -102,6 +102,78 @@ p{
     text-transform: uppercase;
 }
 
+.single-photo-contact{
+    width: 1440px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    margin: auto;
+}
+
+.single-photo-contact-left{
+    margin-left: 146px;
+    width: 564px;
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    align-items: center;
+    border-bottom: black 1px solid;
+}
+
+.single-photo-contact-left p{
+   font-size: 14px;
+   font-style: normal;
+   font-weight: 300;
+   line-height: normal;
+}
+.single-photo-contact-left button{
+    width: 272px;
+    height: 50px;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.single-photo-contact-right{
+    margin-right: 146px;
+    width: 584px;
+    border-bottom: black 1px solid;
+}
+
+.single-photo-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.single-photo-nav img{
+    width: 81px;
+    height: 71px;
+    object-fit: cover;
+}
+
+.single-photo-nav nav .nav-links{
+    width: 81px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    height: 40px;
+}
+
+
+.single-photo-nav nav .nav-links img{
+    width: 25px;
+    height: 7px;
+}
+
+.single-photo-nav nav .nav-links .nav-previous p, .single-photo-nav nav .nav-links .nav-next p{
+    margin: 0;
+}
+
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

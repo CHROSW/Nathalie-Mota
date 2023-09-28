@@ -45,8 +45,13 @@ while ( have_posts() ) :
 	}
 
 	// Previous/next post navigation.
-	echo "<div>";
+	echo "<div class='single-photo-contact'>";
+	echo "<div class='single-photo-contact-left'>";
 	echo "<p>Cette photo vous intéresse ?</p>";
+	echo "<button id='myBtn'>Contact</button>";
+	echo "</div>";
+	echo "<div class='single-photo-contact-right'>";
+	echo "<div class='single-photo-nav'>";
 	echo get_the_post_thumbnail(get_next_post(), 'thumbnail');
 	the_post_navigation(
 		array(
@@ -54,6 +59,8 @@ while ( have_posts() ) :
 			'prev_text' => '<p class="meta-nav"><img src="'. get_template_directory_uri() . '/images/Line 6.png" alt="previous"/></p>',
 		)
 	);
+	echo "</div>";
+	echo "</div>";
 	echo "</div>";
 	echo "</article>";
 endwhile; // End of the loop.

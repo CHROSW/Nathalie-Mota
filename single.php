@@ -14,15 +14,17 @@ get_header();
 /* Start the Loop */
 while ( have_posts() ) :
 	the_post();
+	$cat=wp_get_post_terms(get_the_ID(), 'categorie');
+	$format=wp_get_post_terms(get_the_ID(), 'format');
 	echo "<article id='post-" . get_the_ID() . "' >";
 	echo "<div class='single-photo'>";
 	echo "<div class='single-photo-text'>";
 	the_title('<h1>','</h1>');
-	echo "<p>Référence<span>:</span>" . '' . "</p>";
-	echo "<p>Catégorie<span>:</span>" . '' . "</p>";
-	echo "<p>Format<span>:</span>" . '' . "</p>";
-	echo "<p>Type<span>:</span>" . '' . "</p>";
-	echo "<p>Année<span>:</span>" . '' . "</p>";
+	echo "<p>Référence<span>:</span>" . get_post_field('reference', get_the_ID()) . "</p>";
+	echo "<p>Catégorie<span>:</span>" . $cat[0]->name . "</p>";
+	echo "<p>Format<span>:</span>" . $format[0]->name . "</p>";
+	echo "<p>Type<span>:</span>" . get_post_field('type', get_the_ID()) . "</p>";
+	echo "<p>Année<span>:</span>" . get_the_date('Y', get_the_ID()) . "</p>";
 	echo "</div>";
 	echo get_the_post_thumbnail(get_the_ID(), 'large');
 	echo "</div>";

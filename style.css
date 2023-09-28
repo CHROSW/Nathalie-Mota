@@ -102,6 +102,11 @@ p{
     text-transform: uppercase;
 }
 
+.single-photo-text p span{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
 .single-photo-contact{
     width: 1440px;
     display: flex;
@@ -232,7 +237,7 @@ p{
     font-size: 66px;
     font-style: italic;
     margin:0px 0px 0px 4px;
-    line-height: 66px;
+    line-height: 53px;
 }
 
 /* Modal Body */
@@ -271,9 +276,16 @@ p{
     padding: 0;
 }
 
+.wpcf7-form.init p label, .wpcf7-form.invalid p label{
+    font-size: 12px;
+    font-family: 'poppins', sans-serif;
+}
+
 .wpcf7-form-control.wpcf7-submit.has-spinner{
     width: 263px;
     height: 50px;
+    font-family: 'Space Mono';
+    font-size: 12px;
     background-color: #D8D8D8;
     border-radius: 2px;
     box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.02);

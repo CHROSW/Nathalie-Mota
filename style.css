@@ -214,13 +214,31 @@ p{
 
 /* Modal Header */
 .modal-header {
-    padding: 2px 16px;
     background-color: white;
     color: black;
+    width:597px;
+    margin-bottom: 21.95px;
+}
+
+.modal-header .close{
+    display: none;
+}
+
+.modal-header h2{
+    font-weight:400;
+    width:597px;
+    overflow-wrap: anywhere;
+    font-family: 'space Mono';
+    font-size: 66px;
+    font-style: italic;
+    margin:0px 0px 0px 4px;
+    line-height: 66px;
 }
 
 /* Modal Body */
-.modal-body {padding: 2px 16px;}
+.modal-body {
+    padding: 2px 16px;
+}
 
 /* Modal Footer */
 .modal-footer {
@@ -236,12 +254,30 @@ p{
     margin: auto;
     padding: 0;
     border: 1px solid #888;
-    width: 20%;
+    width: 597px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
     -webkit-animation-name: animatetop;
     -webkit-animation-duration: 0.4s;
     animation-name: animatetop;
     animation-duration: 0.4s
+}
+
+.wpcf7-form.init p, .wpcf7-form.invalid p{
+    margin: 24px 169px 24px 165px; 
+}
+
+.wpcf7-form.init p span input, .wpcf7-form.init p span textarea, .wpcf7-form.invalid p span input, .wpcf7-form.invalid p span textarea{
+    width: 259px;
+    padding: 0;
+}
+
+.wpcf7-form-control.wpcf7-submit.has-spinner{
+    width: 263px;
+    height: 50px;
+    background-color: #D8D8D8;
+    border-radius: 2px;
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.02);
+    border-style: none;
 }
 
 /* Add Animation */

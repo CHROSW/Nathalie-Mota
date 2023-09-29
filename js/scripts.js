@@ -1,5 +1,4 @@
 jQuery(document).ready(function($){
-    console.log('ici');
 // Get the modal
 var modal = document.getElementById('myModal');
 
@@ -26,4 +25,7 @@ window.onclick = function(event) {
     }
 }
 
+let refPhoto = $('.single-photo-text').children('p').first().text();
+let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
+$('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
 });

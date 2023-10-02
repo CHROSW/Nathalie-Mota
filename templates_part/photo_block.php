@@ -20,8 +20,6 @@ $the_query = new WP_Query(
     )
 ); 
 }
-
-
 // The Loop.
 if ( $the_query->have_posts() ) {
 	echo '<ul>';

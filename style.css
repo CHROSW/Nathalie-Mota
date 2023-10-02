@@ -199,6 +199,54 @@ p{
     letter-spacing: 1.8px;
 }
 
+.diaporama ul{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content:space-between;
+    align-items: center;
+    padding:0;
+    width: 1440px;
+    margin: 0px 146px 0px 146px;
+}
+
+.diaporama ul li.photo-left{
+    width: 564px;
+    list-style: none;
+    flex-basis: 0;
+}
+
+
+.diaporama ul li.photo-right{
+    width: 584px;
+    list-style: none;
+    flex-basis: 0;
+}
+
+.diaporama ul li.photo-left img, .diaporama ul li.photo-right img{
+    object-fit: cover;
+    width: 564px;
+    height: 495px;   
+}
+
+.button-show-more{
+    width: 242px;
+    height: 34px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap:10px;
+    padding: 8px 15px;
+    font-family: 'Space Mono';
+    font-size: 12px;
+    font-style: normal;
+    line-height: normal;
+    font-weight: 400;
+    margin-bottom: 64px;
+    margin-top: 53px;
+}
+
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */

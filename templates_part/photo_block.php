@@ -33,7 +33,7 @@ if ( $the_query->have_posts() ) {
         }else{
             echo "<li class='photo-right'>";
         }
-		echo get_the_post_thumbnail(get_the_ID(), 'thumbnail') . '</li>';
+		echo get_the_post_thumbnail(get_the_ID(), 'large') . '</li>';
         $i++;
 	}
 	echo '</ul>';

@@ -80,7 +80,7 @@ p{
     margin: 525px 21px 8px 146px;
 }
 
-.single-photo-text h1{
+.single-photo-text h2{
     width: 420px;
     font-size: 66px;
     font-style: italic;
@@ -178,6 +178,26 @@ p{
     margin: 0;
 }
 
+.diaporama{
+    display: flex;
+    flex-direction: row;
+    margin:auto;
+    justify-content: center;
+    width: 1440px;
+    flex-wrap: wrap;
+}
+
+.diaporama .diaporama-title{
+    width: 1440px;
+    margin: 77px 0px 52px 146px;
+    text-transform: uppercase;
+    font-family: 'Space Mono';
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: 1.8px;
+}
 
 /* The Modal (background) */
 .modal {

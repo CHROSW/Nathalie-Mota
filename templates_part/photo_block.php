@@ -25,9 +25,16 @@ $the_query = new WP_Query(
 // The Loop.
 if ( $the_query->have_posts() ) {
 	echo '<ul>';
+    $i=0;
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
-		echo '<li>' . get_the_post_thumbnail(get_the_ID(), 'thumbnail') . '</li>';
+        if($i % 2 == 0){
+            echo "<li class='photo-left'>";
+        }else{
+            echo "<li class='photo-right'>";
+        }
+		echo get_the_post_thumbnail(get_the_ID(), 'thumbnail') . '</li>';
+        $i++;
 	}
 	echo '</ul>';
 } else {

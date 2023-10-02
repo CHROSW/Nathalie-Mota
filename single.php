@@ -19,7 +19,7 @@ while ( have_posts() ) :
 	echo "<article id='post-" . get_the_ID() . "' >";
 	echo "<div class='single-photo'>";
 	echo "<div class='single-photo-text'>";
-	the_title('<h1>','</h1>');
+	the_title('<h2>','</h2>');
 	echo "<p>Référence<span>:</span>" . get_post_field('reference', get_the_ID()) . "</p>";
 	echo "<p>Catégorie<span>:</span>" . $cat[0]->name . "</p>";
 	echo "<p>Format<span>:</span>" . $format[0]->name . "</p>";
@@ -66,5 +66,9 @@ while ( have_posts() ) :
 	echo "</div>";
 	echo "</article>";
 endwhile; // End of the loop.
-
+echo '<div class="diaporama">';
+echo '<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
+get_template_part('/templates_part/photo_block');
+echo '</div>';
 get_footer();
+?>

@@ -251,6 +251,7 @@ p{
     width: 564px;
     list-style: none;
     flex-basis: 0;
+    margin-bottom: 20px;
 }
 
 
@@ -258,12 +259,21 @@ p{
     width: 584px;
     list-style: none;
     flex-basis: 0;
+    margin-bottom: 20px;
 }
 
 .diaporama ul li.photo-left img, .diaporama ul li.photo-right img{
     object-fit: cover;
     width: 564px;
     height: 495px;   
+}
+
+.area-button-more{
+    display:flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 1440px;
+    margin: auto;
 }
 
 .button-show-more{
@@ -281,7 +291,7 @@ p{
     line-height: normal;
     font-weight: 400;
     margin-bottom: 64px;
-    margin-top: 53px;
+    margin-top: 33px;
 }
 
 /* The Modal (background) */

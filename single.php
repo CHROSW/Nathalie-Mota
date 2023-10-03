@@ -69,7 +69,9 @@ endwhile; // End of the loop.
 echo '<div class="diaporama">';
 echo '<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
 get_template_part('/templates_part/photo_block');
+echo '<div class="area-button-more">';
 echo '<input class="button-show-more" type="button" value="Toutes les photos"/>';
+echo '</div>';
 echo '</div>';
 get_footer();
 ?>

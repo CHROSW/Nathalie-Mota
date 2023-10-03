@@ -24,14 +24,36 @@ $categories = get_terms(
         'hide_empty' => false,
     )
 );
-echo '<select>';
-echo '<option value="">Catégories</option>';
+$formats = get_terms(
+    array(
+        'taxonomy' => 'format',
+        'hide_empty' => false,
+    )
+);
+echo '<div class="filter-nav">';
+echo '<select class="categories">';
+echo '<option value="" selected disabled>Catégories</option>';
 for($i=0; $i < count($categories); $i++){
 echo '<option value ="' . $categories[$i]->slug . '">' . $categories[$i]->name . '</option>';
 }
 echo '</select>';
+echo '<select class="formats">';
+echo '<option value="" selected disabled>Formats</option>';
+for($i=0; $i < count($formats); $i++){
+echo '<option value ="' . $formats[$i]->slug . '">' . $formats[$i]->name . '</option>';
+}
+echo '</select>';
+echo '<select class="filter">';
+echo '<option value="" selected disabled>Trier par</option>';
+echo '<option value ="croissant">Date croissante</option>';
+echo '<option value ="decroissant">Date décroissante</option>';
+echo '</select>';
+echo '</div>';
 echo '<div class="diaporama">';
 get_template_part('/templates_part/photo_block');
+echo '<div class="area-button-more">';
+echo '<input class="button-show-more" type="button" value="Charger plus"/>';
+echo '</div>';
 echo '</div>';
 echo '</section>';
 get_footer();

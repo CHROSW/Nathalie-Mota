@@ -42,7 +42,7 @@ if(is_single(get_the_ID())){
         array(
             'post__not_in' => array( get_the_ID()),
             'post_type' => 'photo',
-            'posts_per_page' => 8,
+            'posts_per_page' => 12,
             'orderby' => 'rand',
         )
     );

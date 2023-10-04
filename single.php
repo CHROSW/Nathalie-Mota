@@ -54,7 +54,11 @@ while ( have_posts() ) :
 	echo "</div>";
 	echo "<div class='single-photo-contact-right'>";
 	echo "<div class='single-photo-nav'>";
-	echo get_the_post_thumbnail(get_next_post(), 'thumbnail');
+	if(get_next_post() != ''){
+		echo get_the_post_thumbnail(get_next_post(), 'thumbnail');
+	}else{
+		echo get_the_post_thumbnail(get_previous_post(), 'thumbnail');
+	}
 	the_post_navigation(
 		array(
 			'next_text' => '<p class="meta-nav"><img src="' . get_template_directory_uri() . '/images/Line 7.png" alt="next"/></p>',
@@ -69,9 +73,6 @@ endwhile; // End of the loop.
 echo '<div class="diaporama">';
 echo '<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
 get_template_part('/templates_part/photo_block');
-echo '<div class="area-button-more">';
-echo '<input class="button-show-all" type="button" value="Toutes les photos"/>';
-echo '</div>';
 echo '</div>';
 get_footer();
 ?>

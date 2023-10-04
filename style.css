@@ -184,7 +184,6 @@ p{
     height: 40px;
 }
 
-
 .single-photo-nav nav .nav-links img{
     width: 25px;
     height: 7px;
@@ -193,7 +192,6 @@ p{
 .single-photo-nav nav .nav-links .nav-previous p, .single-photo-nav nav .nav-links .nav-next p{
     margin: 0;
 }
-
 
 .hero{
     margin: auto;
@@ -227,9 +225,6 @@ p{
     position: relative;
     bottom: 142px;
 }
-
-
-
 
 .diaporama{
     display: flex;

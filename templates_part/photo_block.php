@@ -20,7 +20,7 @@ if(is_single(get_the_ID())){
             )
         );
     }elseif(get_previous_post() != ''){
-        $prev=get_previous_post()->id;
+        $prev=get_previous_post()->ID;
         $the_query = new WP_Query( 
             array(
                 'post__not_in' => array( get_the_ID(), get_previous_post()->ID ),
@@ -57,6 +57,7 @@ if(is_single(get_the_ID())){
 if ( isset($the_query) && $the_query->have_posts()) {
 	echo '<ul>';
     $i=0;
+    $ids='';
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
         if($i % 2 == 0){
@@ -66,6 +67,7 @@ if ( isset($the_query) && $the_query->have_posts()) {
         }
 		echo get_the_post_thumbnail(get_the_ID(), 'large') . '</li>';
         $i++;
+        $ids=get_the_ID().','.$ids;
 	}
 	echo '</ul>';
 } else {
@@ -80,7 +82,8 @@ if(isset($single) && is_single($single)){
             class="button-show-all"
             data-postid="' . $single . '"
             data-navid="' . $next . '"
-            data-categorie="' . $cate[0]->slug .'"
+            data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
+            data-categorie="' . $cate[0]->term_id .'"
             data-nonce="' . wp_create_nonce('load_photos') . '"
             data-action="load_photos"
             data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
@@ -92,7 +95,8 @@ if(isset($single) && is_single($single)){
             class="button-show-all"
             data-postid="' . $single . '"
             data-navid="' . $prev . '"
-            data-categorie="' . $cate[0]->slug .'"
+            data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
+            data-categorie="' . $cate[0]->term_id .'"
             data-nonce="' . wp_create_nonce('load_photos') . '"
             data-action="load_photos"
             data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"

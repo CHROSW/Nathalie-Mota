@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
 // Get the modal
-var modal = document.getElementById('myModal');
+/*var modal = document.getElementById('myModal');
 
 // Get the button that opens the modal
 var btn = document.getElementById("myBtn");
@@ -27,7 +27,7 @@ window.onclick = function(event) {
 
 let refPhoto = $('.single-photo-text').children('p').first().text();
 let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
-$('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
+$('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);*/
 
 
 $('.button-show-all').click(function (e) {
@@ -82,14 +82,70 @@ $('.button-show-all').click(function (e) {
         }
 
     });
-    
-    
-
-
-
-
  
     
 });
+
+
+$('.button-show-more').click(function (e) {
+    let buttonshow = document.querySelector('.button-show-more');
+    let photosids= buttonshow.dataset.photosid;
+    console.log(photosids);
+    if((photosids.split(",").length %12) != 0){
+        alert("Il n'y a pas plus de photos.");
+    }else{
+        $.ajax({
+            type: 'GET',
+            url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosids,
+            beforeSend: function(xhr){
+                xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+            },
+            data: {},
+            success: function (response) {
+               
+              
+                if(response){
+                    let i=0;  
+                    response.forEach(function (element){
+                        photosids= photosids  + "," + element.id;
+                        
+                       
+                        $.ajax({
+                            type: 'GET',
+                            url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                            beforeSend: function(xhr){
+                                xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                            },
+                            data: {},
+    
+                            success: function( mediaresponse){  
+                              
+                                if(i%2 == 0){
+                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                }else{
+                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                }
+                                i++;
+                                
+                            },
+                           
+                        });
+    
+                        let button = document.querySelector('.button-show-more'); 
+                        button.dataset.photosid = photosids;
+                        
+                    });
+                    
+                    
+                    
+                }
+            },
+        });
+    }
+
+    
+
+});
+
 
 });

@@ -11,13 +11,13 @@ get_header();
 echo '<section class="hero">';
 while ( $hero_query->have_posts() ) {
     $hero_query->the_post();
-    echo '<article id="post-' . get_the_ID() . '">';
-    echo '<h2>Photographe Event</h2>';
+    echo '<article id="post-' . get_the_ID() . '">
+        <h2>Photographe Event</h2>';
     echo get_the_post_thumbnail(get_the_ID(), 'full');
     echo '</article>';
 }
-echo '</section>';
-echo '<section>';
+echo '</section>
+    <section>';
 $categories = get_terms(
     array(
         'taxonomy' => 'categorie',
@@ -30,31 +30,28 @@ $formats = get_terms(
         'hide_empty' => false,
     )
 );
-echo '<div class="filter-nav">';
-echo '<select class="categories">';
-echo '<option value="" selected disabled>Catégories</option>';
+echo '<div class="filter-nav">
+    <select class="categories">
+    <option value="" selected disabled>Catégories</option>';
 for($i=0; $i < count($categories); $i++){
 echo '<option value ="' . $categories[$i]->slug . '">' . $categories[$i]->name . '</option>';
 }
-echo '</select>';
-echo '<select class="formats">';
-echo '<option value="" selected disabled>Formats</option>';
+echo '</select>
+    <select class="formats">
+    <option value="" selected disabled>Formats</option>';
 for($i=0; $i < count($formats); $i++){
 echo '<option value ="' . $formats[$i]->slug . '">' . $formats[$i]->name . '</option>';
 }
-echo '</select>';
-echo '<select class="filter">';
-echo '<option value="" selected disabled>Trier par</option>';
-echo '<option value ="croissant">Date croissante</option>';
-echo '<option value ="decroissant">Date décroissante</option>';
-echo '</select>';
-echo '</div>';
-echo '<div class="diaporama">';
+echo '</select>
+    <select class="filter">
+    <option value="" selected disabled>Trier par</option>
+    <option value ="croissant">Date croissante</option>
+    <option value ="decroissant">Date décroissante</option>
+    </select>
+    </div>
+    <div class="diaporama">';
 get_template_part('/templates_part/photo_block');
-echo '<div class="area-button-more">';
-echo '<input class="button-show-more" type="button" value="Charger plus"/>';
-echo '</div>';
-echo '</div>';
-echo '</section>';
+echo '</div>
+    </section>';
 get_footer();
 ?>

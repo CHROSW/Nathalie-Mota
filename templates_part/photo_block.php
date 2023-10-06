@@ -41,7 +41,7 @@ if(is_single(get_the_ID())){
     }
 
 }elseif(is_home()){
-   
+   $home=get_the_ID();
     $the_query = new WP_Query( 
         array(
             'post__not_in' => array( get_the_ID()),
@@ -75,38 +75,37 @@ if ( isset($the_query) && $the_query->have_posts()) {
 }
 
 if(isset($single) && is_single($single)){
-
-    if(isset($next)){
-        echo '<div class="area-button-more">';
-        echo '<button
-            class="button-show-all"
-            data-postid="' . $single . '"
-            data-navid="' . $next . '"
-            data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
-            data-categorie="' . $cate[0]->term_id .'"
-            data-nonce="' . wp_create_nonce('load_photos') . '"
-            data-action="load_photos"
-            data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
-            >Toutes les photos</button>';
-        echo '</div>';
-    }elseif(isset($prev)){
-        echo '<div class="area-button-more">';
-        echo '<button
-            class="button-show-all"
-            data-postid="' . $single . '"
-            data-navid="' . $prev . '"
-            data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
-            data-categorie="' . $cate[0]->term_id .'"
-            data-nonce="' . wp_create_nonce('load_photos') . '"
-            data-action="load_photos"
-            data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
-            >Toutes les photos</button>';
-        echo '</div>';
-    }else{
-        
-    }
+    $navid = (isset($next) ? $next : ( (isset($prev) ? $prev : '' )));
+    echo '<div class="area-button-more">
+        <button
+        class="button-show-all"
+        data-postid="' . $single . '"
+        data-navid="' . $navid . '"
+        data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
+        data-categorie="' . $cate[0]->term_id .'"
+        data-nonce="' . wp_create_nonce('load_photos') . '"
+        data-action="load_photos"
+        data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
+        >Toutes les photos</button>
+        </div>';
     
+}elseif(isset($home) && is_home()){
+    echo '<div class="area-button-more">
+        <button class="button-show-more"
+        data-postid="' . $home . '"
+        data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
+        data-nonce="' . wp_create_nonce('load_photos') . '"
+        data-action="load_photos"
+        data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
+        >Charger plus</button>
+        </div>';
+}else{
+
 }
+
+
+
+
 // Restore original Post Data.
 wp_reset_postdata();
 

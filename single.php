@@ -16,16 +16,16 @@ while ( have_posts() ) :
 	the_post();
 	$cat=wp_get_post_terms(get_the_ID(), 'categorie');
 	$format=wp_get_post_terms(get_the_ID(), 'format');
-	echo "<article id='post-" . get_the_ID() . "' >";
-	echo "<div class='single-photo'>";
-	echo "<div class='single-photo-text'>";
+	echo "<article id='post-" . get_the_ID() . "' >
+		<div class='single-photo'>
+		<div class='single-photo-text'>";
 	the_title('<h2>','</h2>');
-	echo "<p>Référence<span>:</span>" . get_post_field('reference', get_the_ID()) . "</p>";
-	echo "<p>Catégorie<span>:</span>" . $cat[0]->name . "</p>";
-	echo "<p>Format<span>:</span>" . $format[0]->name . "</p>";
-	echo "<p>Type<span>:</span>" . get_post_field('type', get_the_ID()) . "</p>";
-	echo "<p>Année<span>:</span>" . get_the_date('Y', get_the_ID()) . "</p>";
-	echo "</div>";
+	echo "<p>Référence<span>:</span>" . get_post_field('reference', get_the_ID()) . "</p>
+		<p>Catégorie<span>:</span>" . $cat[0]->name . "</p>
+		<p>Format<span>:</span>" . $format[0]->name . "</p>
+		<p>Type<span>:</span>" . get_post_field('type', get_the_ID()) . "</p>
+		<p>Année<span>:</span>" . get_the_date('Y', get_the_ID()) . "</p>
+		</div>";
 	echo get_the_post_thumbnail(get_the_ID(), 'large');
 	echo "</div>";
 	/*the_post_thumbnail();*/
@@ -47,13 +47,13 @@ while ( have_posts() ) :
 	}
 
 	// Previous/next post navigation.
-	echo "<div class='single-photo-contact'>";
-	echo "<div class='single-photo-contact-left'>";
-	echo "<p>Cette photo vous intéresse ?</p>";
-	echo "<button id='myBtn'>Contact</button>";
-	echo "</div>";
-	echo "<div class='single-photo-contact-right'>";
-	echo "<div class='single-photo-nav'>";
+	echo "<div class='single-photo-contact'>
+		<div class='single-photo-contact-left'>
+		<p>Cette photo vous intéresse ?</p>
+		<button id='myBtn'>Contact</button>
+		</div>
+		<div class='single-photo-contact-right'>
+		<div class='single-photo-nav'>";
 	if(get_next_post() != ''){
 		echo get_the_post_thumbnail(get_next_post(), 'thumbnail');
 	}else{
@@ -65,13 +65,13 @@ while ( have_posts() ) :
 			'prev_text' => '<p class="meta-nav"><img src="'. get_template_directory_uri() . '/images/Line 6.png" alt="previous"/></p>',
 		)
 	);
-	echo "</div>";
-	echo "</div>";
-	echo "</div>";
-	echo "</article>";
+	echo "</div>
+		</div>
+		</div>
+		</article>";
 endwhile; // End of the loop.
-echo '<div class="diaporama">';
-echo '<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
+echo '<div class="diaporama">
+	<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
 get_template_part('/templates_part/photo_block');
 echo '</div>';
 get_footer();

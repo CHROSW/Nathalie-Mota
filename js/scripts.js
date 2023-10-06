@@ -30,6 +30,87 @@ let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
 $('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);*/
 
 
+function filterPhoto(categorie, format, order){
+    if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order != 'asc' && order != 'desc')){
+        paramUrl='&categorie=' + categorie + '&format=' + format;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 !== 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&categorie=' + categorie + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 !== 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&format=' + format + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 !== 0) && (order != 'asc' && order != 'desc')){
+        paramUrl = '&categorie=' + categorie;
+    }else if((parseInt(format) %1 === 0) && (parseInt(categorie) %1 !== 0) && (order != 'asc' && order != 'desc')){
+        paramUrl = '&format=' + format;
+    }else if((order == 'asc' || order == 'desc') && (parseInt(categorie) %1 !== 0) && (parseInt(format) %1 !== 0)){
+        paramUrl = '&orderby=date&order=' + order;
+    }else{
+        console.log("Aucune sélection");
+        paramUrl="";
+    }
+    let buttonshow = document.querySelector('.button-show-more');
+    buttonshow.dataset.photosid = ''; 
+    let filterphotosids='';
+
+    $.ajax({
+
+        
+        type: 'GET',
+        url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $('.button-show-more').data('postid') + paramUrl,
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+        },
+        data: {},
+        success: function (response) {
+            $('.diaporama ul').html('');
+            
+            
+            if(response){
+                let i=0;  
+                response.forEach(function (element){
+                   
+                    filterphotosids = filterphotosids  + "," + element.id;
+
+                    $.ajax({
+                        type: 'GET',
+                        url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                        },
+                        data: {},
+
+                        success: function( mediaresponse){   
+
+                            if(i%2 == 0){
+                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                            }else{
+                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                            }
+                            i++;
+                        },
+                    });
+
+                    let button = document.querySelector('.button-show-more');
+                    button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
+                    
+                });
+    
+                
+                
+            }
+        },
+        error: function(error){
+            $('.diaporama').html('');
+            $('.diaporama').append('<ul><li style="list-style:none;margin:auto;margin-bottom:40px;">Sorry, no posts matched.</li></ul>');
+            console.log(error);
+        }
+
+    });
+}
+
+
+
 $('.button-show-all').click(function (e) {
     $(this).hide();
     $.ajax({
@@ -88,15 +169,39 @@ $('.button-show-all').click(function (e) {
 
 
 $('.button-show-more').click(function (e) {
+
+    categorie=$('.categories option:selected').val();
+    format=$('.formats option:selected').val();
+    order=$('.filter option:selected').val();
+
+    if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order != 'asc' && order != 'desc')){
+        paramUrl='&categorie=' + categorie + '&format=' + format;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 !== 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&categorie=' + categorie + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 !== 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
+        paramUrl='&format=' + format + '&orderby=date&order=' + order;
+    }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 !== 0) && (order != 'asc' && order != 'desc')){
+        paramUrl = '&categorie=' + categorie;
+    }else if((parseInt(format) %1 === 0) && (parseInt(categorie) %1 !== 0) && (order != 'asc' && order != 'desc')){
+        paramUrl = '&format=' + format;
+    }else if((order == 'asc' || order == 'desc') && (parseInt(categorie) %1 !== 0) && (parseInt(format) %1 !== 0)){
+        paramUrl = '&orderby=date&order=' + order;
+    }else{
+        console.log("Aucune sélection");
+        paramUrl="";
+    }
+
     let buttonshow = document.querySelector('.button-show-more');
     let photosids= buttonshow.dataset.photosid;
-    console.log(photosids);
+    
     if((photosids.split(",").length %12) != 0){
         alert("Il n'y a pas plus de photos.");
     }else{
         $.ajax({
             type: 'GET',
-            url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosids,
+            url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosids + paramUrl,
             beforeSend: function(xhr){
                 xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
             },
@@ -147,5 +252,19 @@ $('.button-show-more').click(function (e) {
 
 });
 
+
+
+
+$('.categories').change(function(){
+    filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val()); 
+});
+
+$('.formats').change(function(){
+    filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val());
+});
+
+$('.filter').change(function(){
+    filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val());
+});
 
 });

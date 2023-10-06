@@ -34,19 +34,19 @@ echo '<div class="filter-nav">
     <select class="categories">
     <option value="" selected disabled>Catégories</option>';
 for($i=0; $i < count($categories); $i++){
-echo '<option value ="' . $categories[$i]->slug . '">' . $categories[$i]->name . '</option>';
+echo '<option value ="' . $categories[$i]->term_id . '">' . $categories[$i]->name . '</option>';
 }
 echo '</select>
     <select class="formats">
     <option value="" selected disabled>Formats</option>';
 for($i=0; $i < count($formats); $i++){
-echo '<option value ="' . $formats[$i]->slug . '">' . $formats[$i]->name . '</option>';
+echo '<option value ="' . $formats[$i]->term_id . '">' . $formats[$i]->name . '</option>';
 }
 echo '</select>
     <select class="filter">
     <option value="" selected disabled>Trier par</option>
-    <option value ="croissant">Date croissante</option>
-    <option value ="decroissant">Date décroissante</option>
+    <option value ="asc">Date croissante</option>
+    <option value ="desc">Date décroissante</option>
     </select>
     </div>
     <div class="diaporama">';

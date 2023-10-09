@@ -82,14 +82,16 @@ function filterPhoto(categorie, format, order){
                             if(i%2 == 0){
                                 $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
                                 mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
-                                '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '" ><a href="' + mediaresponse.media_details.sizes.full.source_url + 
+                                '" class="fullscreen"><img src="' + objphotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
                                 element.link + '"><img src="' + objphotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                             }else{
                                 $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
                                 mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
-                                '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '" ><a href="' + mediaresponse.media_details.sizes.full.source_url +  
+                                '" class="fullscreen"><img src="' + objphotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
                                 '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
                                 '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
@@ -146,15 +148,20 @@ $('.button-show-all').click(function (e) {
                         success: function( mediaresponse){  
                             
                             if(i%2 == 0){
-                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
-                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
-                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
-                                '</p><p class="hover-categorie">' + cat_name + '</p></li>');
+                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
+                                mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
+                                element.link + '"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                element.title.rendered + '</p><p class="hover-categorie">' + cat_name + '</p></li>');
                             }else{
-                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
+                                mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
-                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
-                                '</p><p class="hover-categorie">' + cat_name + '</p></li>');
+                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                element.title.rendered + '</p><p class="hover-categorie">' + cat_name + '</p></li>');
                             }
                             i++;
                         },
@@ -241,15 +248,21 @@ $('.button-show-more').click(function (e) {
                             success: function( mediaresponse){  
                               
                                 if(i%2 == 0){
-                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                    mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
+                                    mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
                                     element.link + '"><img src="' + objphotos.restURL + 
-                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
+                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                    element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }else{
-                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                    mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
+                                    mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
                                     element.link + '"><img src="' + objphotos.restURL + 
-                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
+                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                    element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }
                                 i++;
                                 

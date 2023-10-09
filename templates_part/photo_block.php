@@ -68,7 +68,7 @@ if ( isset($the_query) && $the_query->have_posts()) {
             echo "<li class='photo-right'>";
         }
 		echo get_the_post_thumbnail(get_the_ID(), 'large') . '
-        <a href="#" class="fullscreen">
+        <a href="' . get_the_post_thumbnail_url(get_the_ID()) . '" class="fullscreen">
         <img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/>
         </a>
         <a class="eye" href="' . get_permalink(get_the_ID()) . '">

@@ -1,7 +1,9 @@
 <?php
+$post_id = get_the_ID();
+$categorie=wp_get_post_terms(get_the_ID(), 'categorie');
+
 if(is_single(get_the_ID())){
-    $single=get_the_ID();
-    $cate=wp_get_post_terms(get_the_ID(), 'categorie');
+    
     if(get_next_post() != ''){
         $next=get_next_post()->ID;
         $the_query = new WP_Query( 
@@ -12,7 +14,7 @@ if(is_single(get_the_ID())){
                     array(
                         'taxonomy' => 'categorie',
                         'field' => 'slug',
-                        'terms' => $cate[0]->slug,
+                        'terms' => $categorie[0]->slug,
                     ),
                 ),
                 'posts_per_page' => 2,
@@ -29,7 +31,7 @@ if(is_single(get_the_ID())){
                     array(
                         'taxonomy' => 'categorie',
                         'field' => 'slug',
-                        'terms' => $cate[0]->slug,
+                        'terms' => $categorie[0]->slug,
                     ),
                 ),
                 'posts_per_page' => 2,
@@ -41,7 +43,7 @@ if(is_single(get_the_ID())){
     }
 
 }elseif(is_home()){
-   $home=get_the_ID();
+   
     $the_query = new WP_Query( 
         array(
             'post__not_in' => array( get_the_ID()),
@@ -61,11 +63,20 @@ if ( isset($the_query) && $the_query->have_posts()) {
 	while ( $the_query->have_posts() ) {
 		$the_query->the_post();
         if($i % 2 == 0){
-            echo "<li class='photo-left'>";
+            echo '<li class="photo-left">';
         }else{
             echo "<li class='photo-right'>";
         }
-		echo get_the_post_thumbnail(get_the_ID(), 'large') . '</li>';
+		echo get_the_post_thumbnail(get_the_ID(), 'large') . '
+        <a href="#" class="fullscreen">
+        <img src="' . get_template_directory_uri() . '/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/>
+        </a>
+        <a class="eye" href="' . get_permalink(get_the_ID()) . '">
+        <img src="' . get_template_directory_uri() . '/images/Icon_eye.png" alt="Infos Icon eye"/>
+        </a>
+        <p class="hover-title">' . get_the_title() . '</p>
+        <p class="hover-categorie">' . $categorie[0]->slug . '</p>
+        </li>';
         $i++;
         $ids=get_the_ID().','.$ids;
 	}
@@ -74,25 +85,25 @@ if ( isset($the_query) && $the_query->have_posts()) {
 	esc_html_e( 'Sorry, no posts matched.' );
 }
 
-if(isset($single) && is_single($single)){
+if(is_single($post_id)){
     $navid = (isset($next) ? $next : ( (isset($prev) ? $prev : '' )));
     echo '<div class="area-button-more">
         <button
         class="button-show-all"
-        data-postid="' . $single . '"
+        data-postid="' . $post_id . '"
         data-navid="' . $navid . '"
         data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
-        data-categorie="' . $cate[0]->term_id .'"
+        data-categorie="' . $categorie[0]->term_id .'"
         data-nonce="' . wp_create_nonce('load_photos') . '"
         data-action="load_photos"
         data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
         >Toutes les photos</button>
         </div>';
     
-}elseif(isset($home) && is_home()){
+}elseif(is_home()){
     echo '<div class="area-button-more">
         <button class="button-show-more"
-        data-postid="' . $home . '"
+        data-postid="' . $post_id . '"
         data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
         data-nonce="' . wp_create_nonce('load_photos') . '"
         data-action="load_photos"

@@ -205,7 +205,7 @@ p{
     margin: auto;
     position: relative;
     z-index: 10;
-    top: 544px;
+    top: 402px;
     height: 142px;
     font-size: 96px;
     font-style: italic;
@@ -258,6 +258,10 @@ p{
     margin: 0px 146px 0px 146px;
 }
 
+.diaporama ul li{
+    position: relative;
+}
+
 .diaporama ul li.photo-left{
     width: 564px;
     list-style: none;
@@ -278,6 +282,65 @@ p{
     width: 564px;
     height: 495px;   
 }
+
+.diaporama ul li .fullscreen img{
+    object-fit: cover;
+    width: 34px;
+    height: 34px;
+    position: absolute;
+    top: 11px;
+    left: 512px;
+    display: none;
+}
+
+.diaporama ul li .eye img{
+    object-fit: cover;
+    width: 46px;
+    height: 31.2px;
+    position: absolute;
+    top: 231.4px;
+    left: 255px;
+    display: none;
+}
+
+.diaporama ul li .hover-title{
+    position: absolute;
+    top: 462px;
+    left: 17px;
+    font-family: "poppins";
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    text-transform: uppercase;
+    margin:0;
+    color:white;
+    display: none;
+}
+
+.diaporama ul li .hover-categorie{
+    position: absolute;
+    top: 462px;
+    left: 472px;
+    font-family: "Space Mono";
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20.73px;
+    text-align: right;
+    text-transform: uppercase;
+    margin:0;
+    color: white;
+    display: none;
+}
+
+.diaporama ul li:hover img.wp-post-image{
+    filter:brightness(30%);
+}
+
+.diaporama ul li:hover .fullscreen img, .diaporama ul li:hover .eye img, .diaporama ul li:hover .hover-title, .diaporama ul li:hover .hover-categorie{
+    display:block;
+
+}
+
 
 .filter-nav{
     margin: auto;

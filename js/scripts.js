@@ -80,9 +80,19 @@ function filterPhoto(categorie, format, order){
                         success: function( mediaresponse){   
 
                             if(i%2 == 0){
-                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
+                                '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
+                                element.link + '"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                             }else{
-                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
+                                '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
+                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
+                                '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                             }
                             i++;
                         },
@@ -110,6 +120,8 @@ function filterPhoto(categorie, format, order){
 
 $('.button-show-all').click(function (e) {
     $(this).hide();
+    let categorie=$('.single-photo-text p').eq(1).text();
+    let cat_name= categorie.substring(categorie.indexOf(':')+1, categorie.length);
     $.ajax({
         type: 'GET',
         url: objphotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postid') + ',' + $(this).data('navid') + ',' + $(this).data('photosid') + '&categorie=' + $(this).data('categorie'),
@@ -132,11 +144,17 @@ $('.button-show-all').click(function (e) {
                         data: {},
 
                         success: function( mediaresponse){  
-                          
+                            
                             if(i%2 == 0){
-                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
+                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
+                                '</p><p class="hover-categorie">' + cat_name + '</p></li>');
                             }else{
-                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
+                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
+                                '</p><p class="hover-categorie">' + cat_name + '</p></li>');
                             }
                             i++;
                         },
@@ -223,9 +241,15 @@ $('.button-show-more').click(function (e) {
                             success: function( mediaresponse){  
                               
                                 if(i%2 == 0){
-                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
+                                    element.link + '"><img src="' + objphotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }else{
-                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ></li>');
+                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="#" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
+                                    element.link + '"><img src="' + objphotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }
                                 i++;
                                 

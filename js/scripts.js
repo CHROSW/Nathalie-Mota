@@ -303,10 +303,10 @@ $('.filter').change(function(){
 
 
 
-$('a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]').click( function(e){
+$("body").on("click", 'a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]', function(e){
     e.preventDefault();
     $('.lightbox').show();
-
+    $('.lightbox-loader').html('');
     let listPhoto = $('button[data-photosid]').data('photosid');
     let url= $(this).attr('href');
     
@@ -334,13 +334,14 @@ $('a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]').click( function(e)
                                 if($('button').hasClass('button-show-all')){
                                     let categorieSingle=$('.single-photo-text p').eq(1).text();
                                     let showCat= categorieSingle.substring(categorieSingle.indexOf(':')+1, categorieSingle.length);
-                                    $('.lightbox-loader').append('<img src="' + mediaresponse.media_details.sizes.full.source_url + 
-                                '" alt="' + element.title.rendered + '"><h2 class="title-lightbox">' + element.title.rendered + 
-                                '</h2><h3 class="categorie-lightbox">' + showCat + '</h3>');
+                                    $('.lightbox-loader').prepend('<figure><img src="' + mediaresponse.media_details.sizes.full.source_url + 
+                                '" alt="' + element.title.rendered + '"><figcaption><h2 class="title-lightbox">' + element.title.rendered + 
+                                '</h2><h3 class="categorie-lightbox">' + showCat + '</h3></figcaption></figure>');
                                 }else{
-                                    $('.lightbox-loader').append('<img src="' + mediaresponse.media_details.sizes.full.source_url + 
-                                    '" alt="' + element.title.rendered + '"><h2 class="title-lightbox">' + element.title.rendered + 
-                                    '</h2><h3 class="categorie-lightbox">' + $('.categories option[value="' + element.categorie + '"]').text() + '</h3>');
+                                    
+                                    $('.lightbox-loader').prepend('<figure><img src="' + mediaresponse.media_details.sizes.full.source_url + 
+                                    '" alt="' + element.title.rendered + '"><figcaption><h2 class="title-lightbox">' + element.title.rendered + 
+                                    '</h2><h3 class="categorie-lightbox">' + $('.categories option[value="' + element.categorie + '"]').text() + '</h3></figcaption></figure>');
                                 }
                                 
 

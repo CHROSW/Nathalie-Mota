@@ -301,4 +301,63 @@ $('.filter').change(function(){
     filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val());
 });
 
+
+
+$('a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]').click( function(e){
+    e.preventDefault();
+    $('.lightbox').show();
+
+    let listPhoto = $('button[data-photosid]').data('photosid');
+    let url= $(this).attr('href');
+    
+    $.ajax({
+        type: 'GET',
+        url: objphotos.restURL + 'wp/v2/photo?include=' +  listPhoto,
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+        },
+        data: {},
+        success: function (response) {
+            if(response){
+
+                response.forEach(function (element){
+                    $.ajax({
+                        type: 'GET',
+                        url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                        beforeSend: function(xhr){
+                            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                        },
+                        data: {},
+
+                        success: function( mediaresponse){
+                            if(url === mediaresponse.media_details.sizes.full.source_url){
+                                if($('button').hasClass('button-show-all')){
+                                    let categorieSingle=$('.single-photo-text p').eq(1).text();
+                                    let showCat= categorieSingle.substring(categorieSingle.indexOf(':')+1, categorieSingle.length);
+                                    $('.lightbox-loader').append('<img src="' + mediaresponse.media_details.sizes.full.source_url + 
+                                '" alt="' + element.title.rendered + '"><h2 class="title-lightbox">' + element.title.rendered + 
+                                '</h2><h3 class="categorie-lightbox">' + showCat + '</h3>');
+                                }else{
+                                    $('.lightbox-loader').append('<img src="' + mediaresponse.media_details.sizes.full.source_url + 
+                                    '" alt="' + element.title.rendered + '"><h2 class="title-lightbox">' + element.title.rendered + 
+                                    '</h2><h3 class="categorie-lightbox">' + $('.categories option[value="' + element.categorie + '"]').text() + '</h3>');
+                                }
+                                
+
+                            }
+                        },
+                    });
+                });
+
+
+            } 
+        },
+    });
+
+});
+
+$('.lightbox-close').click( function(e){
+    $('.lightbox').hide();
+});
+
 });

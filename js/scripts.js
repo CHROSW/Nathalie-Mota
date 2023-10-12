@@ -67,7 +67,7 @@ function filterPhoto(categorie, format, order){
                 let i=0;  
                 response.forEach(function (element){
                    
-                    filterphotosids = filterphotosids  + "," + element.id;
+                    filterphotosids =  element.id + "," + filterphotosids ;
 
                     $.ajax({
                         type: 'GET',
@@ -139,7 +139,7 @@ $('.button-show-all').click(function (e) {
             if(response){
                 let i=0;  
                 response.forEach(function (element){
-                
+                    filterphotosids =  element.id + "," + filterphotosids ;
 
                     $.ajax({
                         type: 'GET',
@@ -172,7 +172,8 @@ $('.button-show-all').click(function (e) {
                     });
 
 
-
+                    let button = document.querySelector('.button-show-all');
+                    button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
 
                 
                     
@@ -238,7 +239,7 @@ $('.button-show-more').click(function (e) {
                 if(response){
                     let i=0;  
                     response.forEach(function (element){
-                        photosids= photosids  + "," + element.id;
+                        photosids=  element.id + "," + photosids;
                         
                        
                         $.ajax({

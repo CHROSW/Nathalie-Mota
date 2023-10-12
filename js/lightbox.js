@@ -1,12 +1,13 @@
 jQuery(document).ready(function($){
 
-    function showLightbox(url, page, nbPageMax, loop_link, first_link){
+    function showLightbox(url, page, nbPageMax, loop_link, firstPhoto){
     
     let listPhoto = $('button[data-photosid]').data('photosid');
+    let nbPhoto= listPhoto.split(',').length;
+    let lastPhoto = nbPhoto%12;
     let matched_next=0;
     let matched_first=0;
     let matched_url = 0;
-    
     let i=0;
     let first_next =0;
     
@@ -29,14 +30,14 @@ jQuery(document).ready(function($){
                         },
                         data: {},
 
-                        success: function( mediaresponse){
-                            
-                            
+                        success: function( mediaresponse){       
+
+                            if(loop_link == "" && page == '1'){ 
+                                firstPhoto = mediaresponse.media_details.sizes.full.source_url;
+                            }
 
                             if(matched_first == '0' && page == '1' && i == '0'){
                                 matched_first = 1;
-                                first_link = mediaresponse.media_details.sizes.full.source_url;
-                            
                             }
 
                             if(matched_url == '1' && matched_next == '0'){
@@ -45,12 +46,11 @@ jQuery(document).ready(function($){
                                 $('.nav-prev').attr("href", loop_link);
                             }
                             if(url === mediaresponse.media_details.sizes.full.source_url){
-                                if(loop_link !== ""){
+                                if(loop_link !== ""){    
                                     $('.nav-next').attr("href", loop_link);
-                                  
                                 }
-                                
                                
+                             
                                 if($('button').hasClass('button-show-all')){
                                     let categorieSingle=$('.single-photo-text p').eq(1).text();
                                     let showCat= categorieSingle.substring(categorieSingle.indexOf(':')+1, categorieSingle.length);
@@ -81,25 +81,38 @@ jQuery(document).ready(function($){
                             }
 
                             
-                            if(i== '12' && (url == mediaresponse.media_details.sizes.full.source_url)){
-                                $('.nav-prev').attr("href", first_link);
+                            if((i== '12' || (i == lastPhoto && page == nbPageMax)) && (url == mediaresponse.media_details.sizes.full.source_url)){
+                                $('.nav-prev').attr("href", firstPhoto);
                                 $('.nav-next').attr("href", loop_link);
                             }
 
-                            loop_link = mediaresponse.media_details.sizes.full.source_url;
-                            
 
                             
+
+                            loop_link = mediaresponse.media_details.sizes.full.source_url;
+                            
+                            
+
+
+                            if((i == lastPhoto && page == nbPageMax)){
+                                $('.nav-next').attr("href", loop_link);
+                            }
                            
                             if(i == '12' && first_next==1){
-                                $('.nav-next').attr("href", loop_link); 
+                                    $('.nav-next').attr("href", loop_link);
+                                if(page== '1' && nbPageMax > 1){
+                                    firstPhoto = loop_link;   
+                                }
+                                
+                                
                                 
                             }   
+                            
 
                             if(i == '12' && page < nbPageMax){
                                 page++;
                                 
-                                showLightbox(url, page, nbPageMax, loop_link, first_link);
+                                showLightbox(url, page, nbPageMax, loop_link, firstPhoto);
                             }
                         },
                     });
@@ -120,10 +133,11 @@ $("body").on("click", 'a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]'
     let allPhoto = $('button[data-photosid]').data('photosid');
     totalPhoto= allPhoto.split(',').length;
     let totalPage =Math.ceil(totalPhoto/12);
-    console.log(totalPage);
+    let firstPhoto = "";
     let loop_link = "";
-    let first_link = "";
-    showLightbox($(this).attr('href'), '1', totalPage, loop_link);
+   
+ 
+    showLightbox($(this).attr('href'), '1', totalPage, loop_link, firstPhoto);
 });
 
 $('.nav-prev').click( function(e){
@@ -133,8 +147,9 @@ $('.nav-prev').click( function(e){
     totalPhoto= allPhoto.split(',').length;
     let totalPage =Math.ceil(totalPhoto/12);
     let loop_link = "";
-    let first_link = "";
-    showLightbox($(this).attr('href'), '1', totalPage, loop_link);
+    let firstPhoto = "";
+ 
+    showLightbox($(this).attr('href'), '1', totalPage, loop_link, firstPhoto);
 });
 
 $('.nav-next').click( function(e){
@@ -144,8 +159,10 @@ $('.nav-next').click( function(e){
     totalPhoto= allPhoto.split(',').length;
     let totalPage =Math.ceil(totalPhoto/12);
     let loop_link = "";
-    let first_link = "";
-    showLightbox($(this).attr('href'), '1', totalPage, loop_link, first_link);
+    let firstPhoto = "";
+ 
+    
+    showLightbox($(this).attr('href'), '1', totalPage, loop_link, firstPhoto);
 });
 
 $('.lightbox-close').click( function(e){

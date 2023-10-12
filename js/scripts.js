@@ -161,7 +161,7 @@ function showLightbox(url){
                                 console.log(first_link);
                             }
 
-                            if(matched_url === 1 && matched_next === 0){
+                            if(matched_url == '1' && matched_next == '0'){
                                 matched_next = 1;  
                                 loop_link = mediaresponse.media_details.sizes.full.source_url; 
                                 $('.nav-prev').attr("href", loop_link);
@@ -191,29 +191,28 @@ function showLightbox(url){
 
                                 
                             }
-                            /*if(url === first_link){
-                                if(first_next = 0){
-                                    $('.nav-next').attr("href", loop_link);
-                                    first_next = 1;
-                                }
-                                $('.nav-prev').attr("href", first_link);
-                            }*/
+                            
                             
                                 
                             i++;
-                            if(i== '1'){
-                                console.log(first_link);
-                                $('.nav-prev').attr("href", first_link);
+                            if(i== '1' && url == mediaresponse.media_details.sizes.full.source_url){
+                                first_next = 1;
+                                $('.nav-prev').attr("href", loop_link);
                             }
-                            
+                            if(i== '12' && url == mediaresponse.media_details.sizes.full.source_url){
+                                $('.nav-prev').attr("href", first_link);
+                                $('.nav-next').attr("href", loop_link);
+                            }
 
                             loop_link = mediaresponse.media_details.sizes.full.source_url;
                             
+
                             
-                            if(i == '12'){
+                            
+                            if(i == '12' && first_next==1){
                                 $('.nav-next').attr("href", loop_link); 
                             }   
-                            
+
                         },
                     });
                     
@@ -223,6 +222,7 @@ function showLightbox(url){
             
         },
     });
+
 }
 
 

@@ -158,6 +158,13 @@ p{
     flex-shrink: 0;
 }
 
+.single-photo-contact-left button:hover{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 .single-photo-contact-right{
     margin-right: 146px;
     width: 584px;
@@ -345,14 +352,20 @@ p{
 .filter-nav{
     margin: auto;
     width: 1440px;
+    height:43px;
+    display:flex;
+    flex-direction: row;
 }
 
 .filter-nav .categories{
-    margin: 20px 36px 0px 146px;
+    margin: 0px 36px 0px 146px;
     width: 260px;
     height: 43px;
     position: relative;
     bottom:39px;
+    border-radius: 8px;
+    border: 1.3px solid #B8BBC2;
+    background: white;
 }
 
 .filter-nav .formats{
@@ -362,6 +375,9 @@ p{
     margin-bottom: 0px;
     position: relative;
     bottom:39px;
+    border-radius: 8px;
+    border: 1.3px solid #B8BBC2;
+    background: white;
 }
 
 .filter-nav .filter{
@@ -370,7 +386,15 @@ p{
     margin-bottom: 0px;
     position: relative;
     bottom:39px;
+    border-radius: 8px;
+    border: 1.3px solid #B8BBC2;
+    background: white;
 }
+
+.filter-nav .categories option[value='4']:focus{
+  color: #E00000;
+}
+
 
 .area-button-more{
     display:flex;
@@ -384,7 +408,7 @@ p{
 .lightbox{
     display:none;
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
+    z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -400,6 +424,7 @@ p{
     top: 50%;
     left: 5%;
     color: white;
+    text-decoration: none;
 }
 
 .lightbox .nav-next{
@@ -407,6 +432,7 @@ p{
     top: 50%;
     left: 90%;
     color:white;
+    text-decoration: none;
 }
 
 .lightbox-loader{
@@ -479,6 +505,13 @@ p{
     margin-top: 33px;
 }
 
+.button-show-all:hover{
+    background-color: black;
+    color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
 .button-show-more{
     width: 242px;
     height: 34px;
@@ -495,7 +528,17 @@ p{
     font-weight: 400;
     margin-bottom: 40px;
     margin-top: 20px;
+    border-radius: 2px;
+    background: #D8D8D8;
+    box-shadow: 0px 2px 1px 0px rgba(0, 0, 0, 0.02);
+    border-color: transparent;
 }
+
+.button-show-more:hover{
+    color:white;
+    background-color: black;
+}
+
 
 /* The Modal (background) */
 .modal {
@@ -619,4 +662,199 @@ p{
 @keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
+}
+
+
+
+
+
+
+
+/** select**/
+.filter-nav .select {
+    display:flex;
+    flex-direction: column;
+  }
+ label.option {
+    padding:0 30px 0 10px;
+    min-height:40px;
+    display:flex;
+    align-items:center;
+    background:white;
+    position:absolute;
+    top:0;
+    width: 100%;
+    pointer-events:none;
+    order:2;
+    z-index:1;
+    transition:background .4s ease-in-out;
+    box-sizing:border-box;
+    overflow:hidden;
+    white-space:nowrap;
+   
+  }
+  label.option:hover {
+    background:#FFD6D6;
+  }
+   
+  .filter-nav div .select:focus .option {
+    position:relative;
+    pointer-events:all;
+  }
+   
+ .filter-nav input {
+    opacity:0;
+    height:43px;
+    z-index:10;
+
+  }
+   
+ .filter-nav input:checked + label {
+    order: 2;
+    z-index:2;
+    background:#fffffe;
+    border:none;
+  }
+   
+  .filter-nav input:checked + label:after{
+    content:'';
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid black;
+    position:absolute;
+    right:10px;
+    top:calc(50% - 2.5px);
+    pointer-events:none;
+    z-index:100;
+  }
+   
+ .filter-nav input:checked + label:before {
+    position:absolute;
+    right:0;
+    height: 40px;
+    width: 40px;
+    content: '';
+    background:white;
+  }
+
+
+
+
+
+@media((min-width: 375px) and (max-width: 799px)){
+    .header a img{
+        padding-left: 28.67px;
+    }
+
+    .hero, .hero img{
+        height: 253px;
+    }
+
+    .hero h2{
+        font-size: 27.59px;
+        line-height: 40.86px;
+        position: relative;
+        top: 106px;
+    }
+
+    .filter-nav {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .filter-nav .categories{
+        width: 110px;
+        margin: 0;
+        position: relative;
+        bottom: 0px;
+        margin-top:35px;
+        margin-bottom: 39px;
+    }
+
+    .filter-nav .formats{
+        width: 110px;
+        margin:0;
+        position: relative;
+        bottom: 0px;
+        margin-top:35px;
+        margin-bottom: 39px;
+    }
+
+    .filter-nav .filter{
+        width: 110px;
+        position: relative;
+        bottom: 0px;
+        margin-top:35px;
+        margin-bottom: 39px;
+    }
+
+    .diaporama ul{
+        display:flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content:space-between;
+        align-items: center;
+        width: 375px;
+    }
+    .header, .footer, .hero, .diaporama, .filter-nav, .area-button-more, .hero img{
+        width: 375px;
+    }
+    .diaporama ul li.photo-left, .diaporama ul li.photo-right, .diaporama ul li.photo-left img, .diaporama ul li.photo-right img{
+        width: 317.665px;
+        height: 278.801px;
+    }
+
+    .diaporama ul li .eye img{
+        position: absolute;
+        top: 139px;
+        left: 150px;
+        width: 30px;
+        height: 20px;
+    }
+
+    .diaporama ul li .fullscreen img{
+        position: absolute;
+        left: 280px;
+        top: 11px;
+        width: 30px;
+        height: 30px;
+    }
+
+    .diaporama ul li .hover-title{
+        position: absolute;
+        left:7px;
+        top: 250px;
+    }
+
+    .diaporama ul li .hover-categorie{
+        position: absolute;
+        left:225px;
+        top: 250px;
+        text-align: right;
+    }
+
+    .button-show-more{
+        margin-top: 1.2px;
+        margin-bottom: 22px;
+    }
+    .footer .menu{
+        margin: 32px 0 32px 0;
+    }
+    .footer .menu li {
+        margin: 12px 0 12px 0; 
+    }
+
+    .footer, .footer .menu{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+
+
+
 }

@@ -27,6 +27,8 @@ let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
 $('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
 
 
+
+
 function filterPhoto(categorie, format, order){
     if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
         paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
@@ -305,8 +307,6 @@ $('.formats').change(function(){
 $('.filter').change(function(){
     filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val());
 });
-
-
 
 
 

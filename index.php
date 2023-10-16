@@ -30,51 +30,32 @@ $formats = get_terms(
         'hide_empty' => false,
     )
 );
-/*echo '<div class="filter-nav">
-    <select class="categories">
+echo '<div class="filter-nav">
+    <select name="categories" onfocus="this.size='. count($categories)+1 . ';"
+    onblur="this.size=0;"
+    onchange="this.size=1; this.blur()" class="categories">
     <option value="" selected disabled>Catégories</option>';
 for($i=0; $i < count($categories); $i++){
 echo '<option value ="' . $categories[$i]->term_id . '">' . $categories[$i]->name . '</option>';
 }
 echo '</select>
-    <select class="formats">
+    <select name="formats" onfocus="this.size='. count($formats)+1 . ';"
+    onblur="this.size=0;"
+    onchange="this.size=1; this.blur()" class="formats">
     <option value="" selected disabled>Formats</option>';
 for($i=0; $i < count($formats); $i++){
 echo '<option value ="' . $formats[$i]->term_id . '">' . $formats[$i]->name . '</option>';
 }
 echo '</select>
-    <select class="filter">
+    <select name="filter" onfocus="this.size=3;"
+    onblur="this.size=0;"
+    onchange="this.size=1; this.blur()" class="filter">
     <option value="" selected disabled>Trier par</option>
-    <option value ="asc">Date croissante</option>
+    <option value ="asc" style="accent-color: yellow;">Date croissante</option>
     <option value ="desc">Date décroissante</option>
     </select>
     </div>
-    <div class="diaporama">';*/
-echo '<div class="filter-nav">
-<div class="categories">
-<div class="select">
-<input name="categories" type="radio" id="optioncat" value ="categories" checked/>
-<label for="optioncat" class="option">Catégories</label>';
-for($i=0; $i < count($categories); $i++){
-    echo '<input  name="cat' . $i . '" type="radio" id="option' . $i . '" value ="' . $categories[$i]->term_id . '"/>
-    <label for="option' . $i . '" class="option">'. $categories[$i]->name .'</label>';       
-}
-echo '</div></div><div class="formats"><div class="select">
-<input name="formats" type="radio" id="optionform" value ="format" checked/>
-<label for="optionform" class="option">Formats</label>';
-for($i=0; $i < count($formats); $i++){
-    echo '<input  name="cat' . $i . '" type="radio" id="option' . $i . '" value ="' . $formats[$i]->term_id . '"/>
-    <label for="option' . $i . '" class="option">'. $formats[$i]->name .'</label>';       
-}
-echo '</div></div><div class="filter"><div class="select">
-<input name="tri" type="radio" id="optiontri" value ="trier" checked/>
-<label for="optiontri" class="option">Trier par</label><input name="asc" type="radio" id="option1" value ="asc" />
-<label for="option1" class="option">Date croissante</label><input name="desc" type="radio" id="option2" value ="desc" />
-<label for="option2" class="option">Date décroissante</label></div></div></div><div class="diaporama">';
-
-
-
-
+    <div class="diaporama">';
 get_template_part('/templates_part/photo_block');
 echo '</div>
     </section>';

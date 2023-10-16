@@ -26,6 +26,10 @@ p{
     align-items: center;
 }
 
+.header{
+    box-shadow: 0px 4px 14px 10px rgba(0, 0, 0, 0.03);
+}
+
 .header a img{
     width:216px;
     height:14px;
@@ -759,6 +763,86 @@ option:disabled{
         margin-bottom: 39px;
     }
 
+
+    .single-photo{
+        width:375px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .single-photo-text{
+        order:2;
+        width: 375px;
+        margin: auto;
+    }
+
+    .single-photo-text h2{
+        line-height: 48px;
+        font-size: 46px;
+        width:262px;
+        margin: auto;
+    }
+
+    .single-photo-text p{
+        width:262px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .single-photo img{
+        order:1;
+        width:265px;
+        height: 397px;
+        margin:20px 0px 20px 0px;
+    }
+
+
+    .single-photo-contact{
+        width:375px;
+        margin: auto;
+        display:flex;
+        flex-direction:column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .single-photo-contact-left{
+        width:375px;
+        margin: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: flex-start;
+    }
+    .single-photo-contact-left p{
+        margin-top: 24px;
+        width: 262px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .single-photo-contact-left button{
+        margin-bottom: 23px;
+        width:262px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .single-photo-contact-right{
+        display:none;
+    }
+
+    .diaporama .diaporama-title{
+        width: 262px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 24px;
+        margin-bottom: 20px;
+    }
+
     .diaporama ul{
         display:flex;
         flex-direction: column;
@@ -804,7 +888,7 @@ option:disabled{
         text-align: right;
     }
 
-    .button-show-more{
+    .button-show-more, .button-show-all{
         margin-top: 1.2px;
         margin-bottom: 22px;
     }
@@ -821,7 +905,40 @@ option:disabled{
         align-items: center;
     }
 
+    .modal-content{
+        width: 286px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
+    .modal-header{
+        width: 286px;
+        margin: auto;
+    }
 
+    .modal-header h2{
+        height:55px;
+        width: 286px;
+        font-size: 32px;
+        line-height: 27px;
+        overflow-wrap: anywhere;
+    }
+
+    .wpcf7-form.init p{
+        margin-left:48px;
+        margin-right: 48px;
+        width: 190px;
+    }
+
+    .wpcf7-form.invalid p, .wpcf7-form.init p span input, .wpcf7-form.init p span textarea, .wpcf7-form.invalid p span input, .wpcf7-form.invalid p span textarea{
+        width: 186px;
+        
+    }
+    
+    .wpcf7-form-control.wpcf7-submit.has-spinner{
+        width: 190px;
+    }
 
 }

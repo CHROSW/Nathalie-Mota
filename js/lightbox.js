@@ -4,6 +4,7 @@ jQuery(document).ready(function($){
     
     $('.lightbox-loader').html('');
         let listPhoto = $('button[data-photosid]').data('photosid');
+        listPhoto = listPhoto.toString(); 
         let nbPhoto= listPhoto.split(',').length;
         let linkPhotoElem = $("a.fullscreen");
         let titlePhotoElem = $("p.hover-title");

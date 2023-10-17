@@ -15,14 +15,16 @@ jQuery(document).ready(function($){
             
             if(url == value.href){
                 if(j-1 >= '0'){
+                    $('.nav-prev').show();
                     $('.nav-prev').attr("href", linkPhotoElem[j - 1].href);
                 }else{
-                    $('.nav-prev').attr("href", linkPhotoElem[nbPhoto - 1].href);
+                    $('.nav-prev').hide();
                 }
-                if(j +1 <= nbPhoto-1){
+                if(j +1 < nbPhoto){
+                    $('.nav-next').show();
                     $('.nav-next').attr("href", linkPhotoElem[j + 1].href);
                 }else{
-                    $('.nav-next').attr("href", linkPhotoElem['0'].href);
+                    $('.nav-next').hide();
                 }
                 $('.lightbox-loader').prepend('<figure><img src="' + value.href + 
                 '" alt="' + titlePhotoElem[key].innerHTML + '"><figcaption><h2 class="title-lightbox">' + titlePhotoElem[key].innerHTML + 

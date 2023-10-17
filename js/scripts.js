@@ -69,7 +69,7 @@ function filterPhoto(categorie, format, order){
                 let i=0;  
                 response.forEach(function (element){
                    
-                    filterphotosids =  element.id + "," + filterphotosids ;
+                    filterphotosids =    filterphotosids + "," + element.id;
 
                     $.ajax({
                         type: 'GET',

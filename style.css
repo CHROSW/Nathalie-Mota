@@ -461,8 +461,8 @@ option:disabled{
     z-index: 1000; /* Sit on top */
     left: 0;
     top: 0;
-    width: 100%; /* Full width */
-    height: 100%; /* Full height */
+    width: 100vw; /* Full width */
+    height: 100vh; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.8); /* Black w/ opacity */
@@ -470,19 +470,35 @@ option:disabled{
 }
 
 .lightbox .nav-prev{
-    position: relative;
+    position: absolute;
     top: 50%;
-    left: 5%;
+    left: 5vw;
     color: white;
     text-decoration: none;
+}
+
+.lightbox .nav-prev:hover{
+    font-weight: 800;
+    stroke: white;
+    stroke-width: 1;
+}
+
+.lightbox .nav-prev svg{
+    margin-right:5px;
 }
 
 .lightbox .nav-next{
     position: absolute;
     top: 50%;
-    left: 90%;
+    left: 88vw;
     color:white;
     text-decoration: none;
+}
+
+.lightbox .nav-next:hover{
+    font-weight: 800;
+    stroke: white;
+    stroke-width: 1;
 }
 
 .lightbox-loader{
@@ -494,15 +510,17 @@ option:disabled{
 
 .lightbox-loader figure{
     position: relative;
-    top: 202px;
-    margin: auto;
+    top: 5vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .lightbox-loader figure img{
     object-fit: cover;
-    width: 564px;
-    height: 495px;
-    margin: auto;
+    width: 65vw;
+    height: 80vh;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .lightbox-loader figcaption{
@@ -952,6 +970,20 @@ option:disabled{
         left:225px;
         top: 250px;
         text-align: right;
+    }
+
+    .lightbox .nav-prev{
+        display: flex;
+        flex-direction: column;
+        line-height: 25px;
+    }
+
+    .lightbox .nav-prev p{
+        order:1;
+    }
+
+    .lightbox .nav-prev svg{
+        order: 2;
     }
 
     .button-show-more, .button-show-all{

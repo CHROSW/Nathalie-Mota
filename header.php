@@ -16,8 +16,16 @@
 		        $image = wp_get_attachment_image_src(attachment_url_to_postid(get_theme_mod('wpc_logo')) , 'full'); 
 	            ?>
 	            <img src="<?php echo $image[0]; ?>" alt="<?php echo esc_attr(get_bloginfo('name', 'display')); ?>">
-            </a>
+            </a>        
             <nav role="navigation" aria-label="<?php _e('Menu principal', 'text-domain'); ?>">
             <?php wp_nav_menu(['theme_location' => 'main-menu',]); ?>
             </nav>
+            <div class="burger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="burger-close">X</div>
+                <div class="burger-content">
+                </div>
+            </div>
         </div>

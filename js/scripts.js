@@ -308,6 +308,17 @@ $('.filter').change(function(){
     filterPhoto($('.categories option:selected').val(), $('.formats option:selected').val(), $('.filter option:selected').val());
 });
 
+let i =0;
+let c2 = $('.header nav div').html();
+$('.burger-content').append('<div>' + c2 + '</div>').hide();
+
+$('.burger').click(function(){
+    
+    $('.burger .line').toggle();
+    $('.burger .burger-close').toggle();
+    $('.burger-content').toggle( i++ %2 === 0);  
+});
+
 
 
 });

@@ -63,6 +63,10 @@ p{
     font-weight: 800;
 }
 
+.header div.burger{
+    display:none;
+}
+
 .footer{
     width: 1440px;
     height: 40px;
@@ -718,6 +722,66 @@ option:disabled{
     .header a img{
         padding-left: 28.67px;
     }
+
+    .header div.burger{
+        display:block;
+    }
+    .header nav{
+        display:none;
+    }
+
+    .header .line{
+        background-color: black;
+        height:2px;
+        width: 27.42px;
+        margin-bottom: 4px;
+        margin-right: 28.67px;
+    }
+
+    .header .burger-close{
+        display:none;
+        margin-right: 28.67px;
+        font-size: 18px;
+        line-height: 18px;
+        width: 27.42px;
+        position: relative;
+        z-index: 100;
+        cursor: pointer;
+    }
+
+    .header .burger-content div{
+        position:absolute; 
+        background-color: red;
+        top:72px; 
+        right: 0px;
+        width:100vw;
+        height:100vh;
+    }
+    .header .burger-content div ul{ 
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-left: auto;
+        margin-right: auto;
+        width:375px;
+        height: 100vh;
+        position: relative;
+        bottom:72px;
+    }
+
+    .header .burger-content div ul li{
+        margin-bottom: 20px;
+    }
+
+    .header .burger-content div ul li a{
+        font-size: 44px;
+        line-height: 65.16px;
+        font-weight: 400;
+        font-family: 'Space Mono';
+        color: white
+    }
+
 
     .hero, .hero img{
         height: 253px;

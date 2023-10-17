@@ -771,11 +771,12 @@ option:disabled{
 
     .header .burger-content div{
         position:absolute; 
-        background-color: red;
+        background-color: #E00000;
         top:72px; 
         right: 0px;
         width:100vw;
         height:100vh;
+        z-index: 1000;
     }
     .header .burger-content div ul{ 
         display: flex;

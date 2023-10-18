@@ -356,34 +356,6 @@ p{
 
 }
 
-option{
-    height:42px;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-left: 18px;
-}
-
-option:hover{
-    box-shadow: 0 0 10px 100px #FFD6D6 inset;
-}
-
-option:checked{
-    box-shadow: 0 0 10px 100px #E00000 inset;
-}
-
-option:active{
-    box-shadow: 0 0 10px 100px #FE5858 inset;
-}
-
-
-option:disabled{  
-    border: 1px solid #215AFF;
-    border-radius: 8px 8px 0px 0px;
-    box-shadow: 0 0 10px 100px white inset;
-    color:black;
-}
-
 .filter-nav{
     margin: auto;
     width: 1440px;
@@ -391,59 +363,175 @@ option:disabled{
     flex-direction: row;
 }
 
+.arrow-up {
+    transform:rotate(90deg);
+    -webkit-transform: rotate(90deg);
+  }
+  
+.arrow-down {
+    transform: rotate(270deg);
+    -webkit-transform: rotate(270deg);
+  }
+  
+
 .filter-nav .categories{
     margin: 0px 36px 0px 146px;
-    width: 260px;
-    max-height: 250px;
+    width: 222px;
+    height: 18px;
     position: relative;
-    bottom:39px;
+    bottom:40px;
     border-radius: 8px;
     border: 1.3px solid #B8BBC2;
     background: white;
-    outline-color: #215AFF;
-    overflow-y: hidden;
+    padding: 11px 18px 11px 18px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.filter-nav .categories:not(:focus){
-    height: 43px;
-    padding-left: 18px;
+.filter-nav .categories:active{
+    border-color: #215AFF;
+}
+
+.filter-nav .categories ul{
+    display: none;
+    list-style: none;
+    position:absolute;
+    right:0px;
+    top:25px;
+    z-index:10;
+}
+
+.filter-nav .categories ul li{
+    background-color: white;
+    padding: 11px 18px 11px 18px;
+    width: 222px;
+    height: 18px;
+}
+
+.filter-nav .categories ul li:hover{
+    background-color: #FFD6D6;
+}
+
+.filter-nav .categories ul li:active{
+    background-color: #FE5858;
+}
+
+.filter-nav .categories .selected{
+    background-color: #E00000;
+    color: white;
+}
+
+
+.filter-nav .categories ul li:first-child{
+    margin-top: 40px;
 }
 
 .filter-nav .formats{
-    width: 260px;
-    max-height: 150px;
-    margin-right: 334px;
+    width: 222px;
+    height: 18px;
+    margin-right: 332px;
     margin-bottom: 0px;
     position: relative;
-    bottom:39px;
+    bottom:40px;
     border-radius: 8px;
     border: 1.3px solid #B8BBC2;
     background: white;
-    overflow-y: hidden;
-    outline-color: #215AFF;
+    padding: 11px 18px 11px 18px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.filter-nav .formats:not(:focus){
-    height: 43px;
-    padding-left: 18px;
+.filter-nav .formats:active{
+    border-color: #215AFF;
+}
+
+.filter-nav .formats ul{
+    display: none;
+    list-style: none;
+    position:absolute;
+    right:0px;
+    top:25px;
+    z-index:10;
+}
+
+.filter-nav .formats ul li{
+    background-color: white;
+    padding: 11px 18px 11px 18px;
+    width: 222px;
+    height: 18px;
+}
+
+.filter-nav .formats ul li:hover{
+    background-color: #FFD6D6;
+}
+
+.filter-nav .formats ul li:active{
+    background-color: #FE5858;
+}
+
+.filter-nav .formats .selected{
+    background-color: #E00000;
+    color: white;
+}
+
+
+.filter-nav .formats ul li:first-child{
+    margin-top: 40px;
 }
 
 .filter-nav .filter{
-    width: 260px;
-    max-height: 150px;
+    width: 222px;
+    height: 18px;
     margin-bottom: 0px;
     position: relative;
-    bottom:39px;
+    bottom:40px;
     border-radius: 8px;
     border: 1.3px solid #B8BBC2;
     background: white;
-    overflow-y: hidden;
-    outline-color: #215AFF;
+    padding: 11px 18px 11px 18px;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.filter-nav .filter:not(:focus){
-    height: 43px;
-    padding-left: 18px;
+.filter-nav .filter:active{
+    border-color: #215AFF;
+}
+
+.filter-nav .filter ul{
+    display: none;
+    list-style: none;
+    position:absolute;
+    right:0px;
+    top:25px;
+    z-index:10;
+}
+
+.filter-nav .filter ul li{
+    background-color: white;
+    padding: 11px 18px 11px 18px;
+    width: 222px;
+    height: 18px;
+}
+
+.filter-nav .filter ul li:hover{
+    background-color: #FFD6D6;
+}
+
+.filter-nav .filter ul li:active{
+    background-color: #FE5858;
+}
+
+.filter-nav .filter .selected{
+    background-color: #E00000;
+    color: white;
+}
+
+
+.filter-nav .filter ul li:first-child{
+    margin-top: 40px;
 }
 
 .area-button-more{
@@ -831,6 +919,18 @@ option:disabled{
         margin-bottom: 39px;
     }
 
+    .filter-nav .categories ul{
+        width: 110px;
+        position:absolute;
+        right:50px;
+        top:24px;
+        z-index:10;
+    }
+
+    .filter-nav .categories ul li{
+        width:89px;
+    }
+
     .filter-nav .formats{
         width: 110px;
         margin:0;
@@ -838,6 +938,18 @@ option:disabled{
         bottom: 0px;
         margin-top:35px;
         margin-bottom: 39px;
+    }
+
+    .filter-nav .formats ul{
+        width: 110px;
+        position:absolute;
+        right:50px;
+        top:24px;
+        z-index:10;
+    }
+
+    .filter-nav .formats ul li{
+        width: 89px;
     }
 
     .filter-nav .filter{
@@ -848,6 +960,20 @@ option:disabled{
         margin-bottom: 39px;
     }
 
+    .filter-nav .filter ul{
+        width: 110px;
+        position:absolute;
+        right:50px;
+        top:24px;
+        z-index:10;
+    }
+
+    .filter-nav .filter ul li{
+        width: 89px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        height: 42px;
+    }
 
     .single-photo{
         width:375px;

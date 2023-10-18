@@ -30,30 +30,27 @@ $formats = get_terms(
         'hide_empty' => false,
     )
 );
-echo '<div class="filter-nav">
-    <select name="categories" onfocus="this.size='. count($categories)+1 . ';"
-    onblur="this.size=0;"
-    onchange="this.size=1; this.blur()" class="categories">
-    <option value="" selected disabled>Catégories</option>';
+echo '<div class="filter-nav">   
+    <div class="categories"><span>Catégories</span>
+    <div class="arrow-down"><</div>
+    <ul>';
 for($i=0; $i < count($categories); $i++){
-echo '<option value ="' . $categories[$i]->term_id . '">' . $categories[$i]->name . '</option>';
+echo '<li  id="cat-' . $categories[$i]->term_id . '">' . $categories[$i]->name . '</li>';
 }
-echo '</select>
-    <select name="formats" onfocus="this.size='. count($formats)+1 . ';"
-    onblur="this.size=0;"
-    onchange="this.size=1; this.blur()" class="formats">
-    <option value="" selected disabled>Formats</option>';
+echo '</ul></div>
+    <div class="formats"><span>Formats</span>
+    <div class="arrow-down"><</div>
+    <ul>';
 for($i=0; $i < count($formats); $i++){
-echo '<option value ="' . $formats[$i]->term_id . '">' . $formats[$i]->name . '</option>';
+echo '<li id="format-' . $formats[$i]->term_id . '">' . $formats[$i]->name . '</li>';
 }
-echo '</select>
-    <select name="filter" onfocus="this.size=3;"
-    onblur="this.size=0;"
-    onchange="this.size=1; this.blur()" class="filter">
-    <option value="" selected disabled>Trier par</option>
-    <option value ="asc" style="accent-color: yellow;">Date croissante</option>
-    <option value ="desc">Date décroissante</option>
-    </select>
+echo '</ul></div>
+    <div class="filter"><span>Trier par</span>
+    <div class="arrow-down"><</div>
+    <ul>
+    <li id="tri-asc" style="accent-color: yellow;">Date croissante</li>
+    <li id="tri-desc">Date décroissante</li>
+    </ul></div>
     </div>
     <div class="diaporama">';
 get_template_part('/templates_part/photo_block');

@@ -10,7 +10,6 @@ jQuery(document).ready(function($){
         let titlePhotoElem = $("p.hover-title");
         let categoriePhotoElem = $("p.hover-categorie");
         let j=0;
-        console.log(titlePhotoElem);
         $.each(linkPhotoElem, function (key, value) {
             
             if(url == value.href){

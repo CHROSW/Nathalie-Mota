@@ -1130,6 +1130,10 @@ p{
         align-items: center;
     }
 
+    .footer,.footer .menu, .footer nav{
+        width: 375px;
+    }
+
     .modal-content{
         width: 286px;
         display: flex;

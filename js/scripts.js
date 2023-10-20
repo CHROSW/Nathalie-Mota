@@ -1,12 +1,12 @@
 jQuery(document).ready(function($){
 // Get the modal
-var modal = document.getElementById('myModal');
+var modal = document.getElementById('contactModal');
 
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
 // When the user clicks on the button, open the modal
-$('#myBtn').click( function() {
+$('#contactModalBtn').click( function() {
     modal.style.display = "block";
 });
 
@@ -103,6 +103,12 @@ function filterPhoto(categorie, format, order){
                     });
 
                     let button = document.querySelector('.button-show-more');
+                    if(filterphotosids.substring(0,1) === ','){
+                        filterphotosids=filterphotosids.substring(1, filterphotosids.length);
+                    }
+                    if(filterphotosids.substring(filterphotosids.length-1, filterphotosids.length) === ','){
+                        filterphotosids=filterphotosids.substring(0, filterphotosids.length-1);
+                    }
                     button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
                     
                 });
@@ -175,6 +181,12 @@ $('.button-show-all').click(function (e) {
 
 
                     let button = document.querySelector('.button-show-all');
+                    if(filterphotosids.substring(0,1) === ','){
+                        filterphotosids=filterphotosids.substring(1, filterphotosids.length);
+                    }
+                    if(filterphotosids.substring(filterphotosids.length-1, filterphotosids.length) === ','){
+                        filterphotosids=filterphotosids.substring(0, filterphotosids.length-1);
+                    }
                     button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
 
                 
@@ -229,7 +241,6 @@ $('body').on('click', '.button-show-more', function (e) {
     }else if((order == 'asc' || order == 'desc') && (parseInt(categorie) %1 !== 0) && (parseInt(format) %1 !== 0)){
         paramUrl = '&orderby=date&order=' + order;
     }else{
-        console.log("Aucune sélection");
         paramUrl="";
     }
 
@@ -289,6 +300,12 @@ $('body').on('click', '.button-show-more', function (e) {
                         });
     
                         let button = document.querySelector('.button-show-more'); 
+                        if(photosids.substring(0,1) === ','){
+                            photosids=photosids.substring(1, photosids.length);
+                        }
+                        if(photosids.substring(photosids.length-1, photosids.length) === ','){
+                            photosids=photosids.substring(0, photosids.length-1);
+                        }
                         button.dataset.photosid = photosids;
                         
                     });

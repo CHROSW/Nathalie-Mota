@@ -1,8 +1,8 @@
 <!-- Trigger/Open The Modal -->
-<!--<button id="myBtn">Contact</button>-->
+<!--<button id="contactModalBtn">Contact</button>-->
 
 <!-- The Modal -->
-<div id="myModal" class="modal">
+<div id="contactModal" class="modal">
 
 <!-- Modal content -->
     <div class="modal-content">

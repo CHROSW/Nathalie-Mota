@@ -23,13 +23,23 @@ window.onclick = function(event) {
 }
 
 let refPhoto = $('.single-photo-text').children('p').first().text();
+/* substring contain only reference and not side text */
 let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
 $('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
 
 
 
-
+/** 
+ * @param categorie custom term content name categorie for custom post photo on list select optional
+ * @param format custom term content name format for custom post photo on list select optional
+ * @param order photo order on list select optional 
+ * 
+ * @return html display
+ * 
+ * function to filter custom post photo data and display on grid image list with default param based on rest API
+ * **/
 function filterPhoto(categorie, format, order){
+    /* check param value and determine param used */
     if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
         paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
     }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order != 'asc' && order != 'desc')){
@@ -68,7 +78,7 @@ function filterPhoto(categorie, format, order){
             if(response){
                 let i=0;  
                 response.forEach(function (element){
-                   
+                   /* string contain list id separate by , */
                     filterphotosids =    filterphotosids + "," + element.id;
 
                     $.ajax({
@@ -103,6 +113,7 @@ function filterPhoto(categorie, format, order){
                     });
 
                     let button = document.querySelector('.button-show-more');
+                    /* remove , at begin and at end of string */
                     if(filterphotosids.substring(0,1) === ','){
                         filterphotosids=filterphotosids.substring(1, filterphotosids.length);
                     }
@@ -147,6 +158,7 @@ $('.button-show-all').click(function (e) {
             if(response){
                 let i=0;  
                 response.forEach(function (element){
+                    /* string contain list id separate by , */
                     filterphotosids =  element.id + "," + filterphotosids ;
 
                     $.ajax({
@@ -181,6 +193,7 @@ $('.button-show-all').click(function (e) {
 
 
                     let button = document.querySelector('.button-show-all');
+                    /* remove , at begin and at end of string */
                     if(filterphotosids.substring(0,1) === ','){
                         filterphotosids=filterphotosids.substring(1, filterphotosids.length);
                     }
@@ -263,6 +276,7 @@ $('body').on('click', '.button-show-more', function (e) {
                 if(response){
                     let i=0;  
                     response.forEach(function (element){
+                        /* string contain list id separate by , */
                         photosids=  element.id + "," + photosids;
                         
                        
@@ -300,6 +314,7 @@ $('body').on('click', '.button-show-more', function (e) {
                         });
     
                         let button = document.querySelector('.button-show-more'); 
+                        /* remove , at begin and at end of string */
                         if(photosids.substring(0,1) === ','){
                             photosids=photosids.substring(1, photosids.length);
                         }

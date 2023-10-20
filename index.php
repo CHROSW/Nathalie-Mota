@@ -6,18 +6,7 @@ $hero_query = new WP_Query(
         'orderby' => 'rand',
     )
 );
-
-get_header();
-echo '<section class="hero">';
-while ( $hero_query->have_posts() ) {
-    $hero_query->the_post();
-    echo '<article id="post-' . get_the_ID() . '">
-        <h2>Photographe Event</h2>';
-    echo get_the_post_thumbnail(get_the_ID(), 'full');
-    echo '</article>';
-}
-echo '</section>
-    <section>';
+/* taxonomy list by taxonomy name */ 
 $categories = get_terms(
     array(
         'taxonomy' => 'categorie',
@@ -30,7 +19,21 @@ $formats = get_terms(
         'hide_empty' => false,
     )
 );
-echo '<div class="filter-nav">   
+
+get_header();
+/* hero section */
+echo '<section class="hero">';
+while ( $hero_query->have_posts() ) {
+    $hero_query->the_post();
+    echo '<article id="post-' . get_the_ID() . '">
+        <h2>Photographe Event</h2>';
+    echo get_the_post_thumbnail(get_the_ID(), 'full');
+    echo '</article>';
+}
+/* filter section */
+echo '</section>
+    <section>
+    <div class="filter-nav">   
     <div class="categories"><span>Catégories</span>
     <div class="arrow-down"><</div>
     <ul>';
@@ -53,6 +56,7 @@ echo '</ul></div>
     </ul></div>
     </div>
     <div class="diaporama">';
+/*list image content */
 get_template_part('/templates_part/photo_block');
 echo '</div>
     </section>';

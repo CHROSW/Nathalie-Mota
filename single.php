@@ -11,24 +11,25 @@
 
 get_header();
 
-/* Start the Loop */
+/* main section */
 while ( have_posts() ) :
 	the_post();
-	$cat=wp_get_post_terms(get_the_ID(), 'categorie');
+	$categorie=wp_get_post_terms(get_the_ID(), 'categorie');
 	$format=wp_get_post_terms(get_the_ID(), 'format');
 	echo "<article id='post-" . get_the_ID() . "' >
 		<div class='single-photo'>
 		<div class='single-photo-text'>";
 	the_title('<h2>','</h2>');
 	echo "<p>Référence<span>:</span>" . get_post_field('reference', get_the_ID()) . "</p>
-		<p>Catégorie<span>:</span>" . $cat[0]->name . "</p>
+		<p>Catégorie<span>:</span>" . $categorie[0]->name . "</p>
 		<p>Format<span>:</span>" . $format[0]->name . "</p>
 		<p>Type<span>:</span>" . get_post_field('type', get_the_ID()) . "</p>
 		<p>Année<span>:</span>" . get_the_date('Y', get_the_ID()) . "</p>
 		</div>";
+	/*the_post_thumbnail();*/
 	echo get_the_post_thumbnail(get_the_ID(), 'large');
 	echo "</div>";
-	/*the_post_thumbnail();*/
+	
 	
 
 	if ( is_attachment() ) {
@@ -46,7 +47,7 @@ while ( have_posts() ) :
 		comments_template();
 	}
 
-	// Previous/next post navigation.
+	/* section with button contact and navigation with thumbnail */
 	echo "<div class='single-photo-contact'>
 		<div class='single-photo-contact-left'>
 		<p>Cette photo vous intéresse ?</p>
@@ -59,6 +60,7 @@ while ( have_posts() ) :
 	}else{
 		echo get_the_post_thumbnail(get_previous_post(), 'thumbnail');
 	}
+	// Previous/next post navigation.
 	the_post_navigation(
 		array(
 			'next_text' => '<p class="meta-nav"><img src="' . get_template_directory_uri() . '/images/Line 7.png" alt="next"/></p>',
@@ -69,7 +71,8 @@ while ( have_posts() ) :
 		</div>
 		</div>
 		</article>";
-endwhile; // End of the loop.
+endwhile; 
+/* section list image */
 echo '<div class="diaporama">
 	<h3 class="diaporama-title">Vous aimeriez aussi</h3>';
 get_template_part('/templates_part/photo_block');

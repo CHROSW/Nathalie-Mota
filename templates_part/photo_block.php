@@ -55,7 +55,7 @@ if(is_single(get_the_ID())){
 }else{
   
 }
-// The Loop.
+// html display for list image based on query parameter.
 if ( isset($the_query) && $the_query->have_posts()) {
 	echo '<ul>';
     $i=0;
@@ -84,7 +84,7 @@ if ( isset($the_query) && $the_query->have_posts()) {
 } else {
 	esc_html_e( 'Sorry, no posts matched.' );
 }
-
+/* button display after list image */
 if(is_single($post_id)){
     $navid = (isset($next) ? $next : ( (isset($prev) ? $prev : '' )));
     echo '<div class="area-button-more">

@@ -1,4 +1,5 @@
 <?php
+/* head link */ 
 function enqueue_script_my_scripts(){
     wp_enqueue_style('nathaliemotacss', get_template_directory_uri() . '/style.css');
     wp_register_script('nathaliemotascript', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0', false);
@@ -9,7 +10,7 @@ function enqueue_script_my_scripts(){
 }
 
 add_action('wp_enqueue_scripts', 'enqueue_script_my_scripts');
-
+/* wordpress menu display on theme */ 
 function register_my_menu() {
     register_nav_menu( 'main-menu' , __( 'Menu principal', 'text-domain' ) );
 	register_nav_menu( 'footer-menu', __( 'Footer Menu', 'text-domain'));

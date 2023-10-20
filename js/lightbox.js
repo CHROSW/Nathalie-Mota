@@ -1,5 +1,12 @@
 jQuery(document).ready(function($){
 
+    /**
+     * @param url link image to show required
+     * 
+     * @return html display
+     * 
+     * function to show image on lightbox with title and custom term categorie on custom post photo
+     * **/
     function showLightbox(url){
     
     $('.lightbox-loader').html('');

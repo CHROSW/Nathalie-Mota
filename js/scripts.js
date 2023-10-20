@@ -28,6 +28,18 @@ let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
 $('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
 
 
+/* add nav menu at burger menu on load page and hide this*/
+let i =0;
+let c2 = $('.header nav div').html();
+$('.burger-content').append('<div>' + c2 + '</div>').hide();
+
+$('.burger').click(function(){
+    
+    $('.burger .line').toggle();
+    $('.burger .burger-close').toggle();
+    $('.burger-content').toggle( i++ %2 === 0);  
+});
+
 
 /** 
  * @param categorie custom term content name categorie for custom post photo on list select optional
@@ -55,20 +67,19 @@ function filterPhoto(categorie, format, order){
     }else if((order == 'asc' || order == 'desc') && (parseInt(categorie) %1 !== 0) && (parseInt(format) %1 !== 0)){
         paramUrl = '&orderby=date&order=' + order;
     }else{
-        console.log("Aucune sélection");
         paramUrl="";
     }
-    let buttonshow = document.querySelector('.button-show-more');
-    buttonshow.dataset.photosid = ''; 
-    let filterphotosids='';
+    let buttonShow = document.querySelector('.button-show-more');
+    buttonShow.dataset.photosId = ''; 
+    let filterPhotosIds='';
 
     $.ajax({
 
         
         type: 'GET',
-        url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $('.button-show-more').data('postid') + paramUrl,
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $('.button-show-more').data('postId') + paramUrl,
         beforeSend: function(xhr){
-            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+            xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
         },
         data: {},
         success: function (response) {
@@ -79,33 +90,34 @@ function filterPhoto(categorie, format, order){
                 let i=0;  
                 response.forEach(function (element){
                    /* string contain list id separate by , */
-                    filterphotosids =    filterphotosids + "," + element.id;
+                    filterPhotosIds =    filterPhotosIds + "," + element.id;
 
                     $.ajax({
                         type: 'GET',
-                        url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                        url: objPhotos.restURL + 'wp/v2/media/' + element.featured_media,
                         beforeSend: function(xhr){
-                            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                            xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
                         },
                         data: {},
 
-                        success: function( mediaresponse){   
+                        success: function( mediaResponse){   
 
                             if(i%2 == 0){
                                 $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
-                                '" ><a href="' + mediaresponse.media_details.sizes.full.source_url + 
-                                '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + 
+                                '" ><a href="' + mediaResponse.media_details.sizes.full.source_url + 
+                                '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
-                                element.link + '"><img src="' + objphotos.restURL + 
-                                '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
+                                element.link + '"><img src="' + objPhotos.restURL + 
+                                '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered +
+                                '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                             }else{
                                 $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + 
-                                '" ><a href="' + mediaresponse.media_details.sizes.full.source_url +  
-                                '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + 
+                                '" ><a href="' + mediaResponse.media_details.sizes.full.source_url +  
+                                '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
-                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
+                                '"><img src="' + objPhotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + element.title.rendered + 
                                 '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                             }
                             i++;
@@ -114,13 +126,13 @@ function filterPhoto(categorie, format, order){
 
                     let button = document.querySelector('.button-show-more');
                     /* remove , at begin and at end of string */
-                    if(filterphotosids.substring(0,1) === ','){
-                        filterphotosids=filterphotosids.substring(1, filterphotosids.length);
+                    if(filterPhotosIds.substring(0,1) === ','){
+                        filterPhotosIds=filterPhotosIds.substring(1, filterPhotosIds.length);
                     }
-                    if(filterphotosids.substring(filterphotosids.length-1, filterphotosids.length) === ','){
-                        filterphotosids=filterphotosids.substring(0, filterphotosids.length-1);
+                    if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) === ','){
+                        filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
                     }
-                    button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
+                    button.dataset.photosId = filterPhotosIds.substring(1,filterPhotosIds.length);
                     
                 });
     
@@ -138,20 +150,15 @@ function filterPhoto(categorie, format, order){
 }
 
 
-
-
-
-
-
 $('.button-show-all').click(function (e) {
     $(this).hide();
     let categorie=$('.single-photo-text p').eq(1).text();
-    let cat_name= categorie.substring(categorie.indexOf(':')+1, categorie.length);
+    let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
     $.ajax({
         type: 'GET',
-        url: objphotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postid') + ',' + $(this).data('navid') + ',' + $(this).data('photosid') + '&categorie=' + $(this).data('categorie'),
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postId') + ',' + $(this).data('navId') + ',' + $(this).data('photosId') + '&categorie=' + $(this).data('categorie'),
         beforeSend: function(xhr){
-            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+            xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
         },
         data: {},
         success: function (response) {
@@ -159,33 +166,33 @@ $('.button-show-all').click(function (e) {
                 let i=0;  
                 response.forEach(function (element){
                     /* string contain list id separate by , */
-                    filterphotosids =  element.id + "," + filterphotosids ;
+                    filterPhotosIds =  element.id + "," + filterPhotosIds ;
 
                     $.ajax({
                         type: 'GET',
-                        url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                        url: objPhotos.restURL + 'wp/v2/media/' + element.featured_media,
                         beforeSend: function(xhr){
-                            xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                            xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
                         },
                         data: {},
 
-                        success: function( mediaresponse){  
+                        success: function( mediaResponse){  
                             
                             if(i%2 == 0){
                                 $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
-                                mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
-                                element.link + '"><img src="' + objphotos.restURL + 
+                                element.link + '"><img src="' + objPhotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
-                                element.title.rendered + '</p><p class="hover-categorie">' + cat_name + '</p></li>');
+                                element.title.rendered + '</p><p class="hover-categorie">' + categorieName + '</p></li>');
                             }else{
                                 $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
-                                mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                 '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
-                                '"><img src="' + objphotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
-                                element.title.rendered + '</p><p class="hover-categorie">' + cat_name + '</p></li>');
+                                '"><img src="' + objPhotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                element.title.rendered + '</p><p class="hover-categorie">' + categorieName + '</p></li>');
                             }
                             i++;
                         },
@@ -194,19 +201,17 @@ $('.button-show-all').click(function (e) {
 
                     let button = document.querySelector('.button-show-all');
                     /* remove , at begin and at end of string */
-                    if(filterphotosids.substring(0,1) === ','){
-                        filterphotosids=filterphotosids.substring(1, filterphotosids.length);
+                    if(filterPhotosIds.substring(0,1) === ','){
+                        filterPhotosIds=filterPhotosIds.substring(1, filterPhotosIds.length);
                     }
-                    if(filterphotosids.substring(filterphotosids.length-1, filterphotosids.length) === ','){
-                        filterphotosids=filterphotosids.substring(0, filterphotosids.length-1);
+                    if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) === ','){
+                        filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
                     }
-                    button.dataset.photosid = filterphotosids.substring(1,filterphotosids.length);
+                    button.dataset.photosId = filterPhotosIds.substring(1,filterPhotosIds.length);
 
                 
                     
-                });
-    
-                
+                });     
                 
             }
         },
@@ -227,16 +232,16 @@ $('body').on('click', '.button-show-more', function (e) {
     let format="";
     let order="";
     if($('.categories ul li').hasClass('selected')){
-        let categorie_html_id=$('.categories ul li.selected').attr('id');
-        categorie = parseInt(categorie_html_id.substring(4, categorie_html_id.length));
+        let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        categorie = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
     }
     if($('.formats ul li').hasClass('selected')){
-        let format_html_id=$('.formats ul li.selected').attr('id');
-        format = parseInt(format_html_id.substring(7, format_html_id.length));
+        let formatHtmlId=$('.formats ul li.selected').attr('id');
+        format = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
     }
     if($('.filter ul li').hasClass('selected')){
-    let filter_html_id=$('.filter ul li.selected').attr('id');
-    order = parseInt(filter_html_id.substring(4, filter_html_id.length));
+    let filterHtmlId=$('.filter ul li.selected').attr('id');
+    order = parseInt(filterHtmlId.substring(4, filterHtmlId.length));
     }
 
     if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
@@ -258,16 +263,16 @@ $('body').on('click', '.button-show-more', function (e) {
     }
 
     let buttonshow = document.querySelector('.button-show-more');
-    let photosids= buttonshow.dataset.photosid;
+    let photosIds= buttonshow.dataset.photosId;
     
-    if((photosids.split(",").length %12) != 0){
+    if((photosIds.split(",").length %12) != 0){
         alert("Il n'y a pas plus de photos.");
     }else{
         $.ajax({
             type: 'GET',
-            url: objphotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosids + paramUrl,
+            url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postId') + ',' + photosIds + paramUrl,
             beforeSend: function(xhr){
-                xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
             },
             data: {},
             success: function (response) {
@@ -277,33 +282,33 @@ $('body').on('click', '.button-show-more', function (e) {
                     let i=0;  
                     response.forEach(function (element){
                         /* string contain list id separate by , */
-                        photosids=  element.id + "," + photosids;
+                        photosIds=  element.id + "," + photosIds;
                         
                        
                         $.ajax({
                             type: 'GET',
-                            url: objphotos.restURL + 'wp/v2/media/' + element.featured_media,
+                            url: objPhotos.restURL + 'wp/v2/media/' + element.featured_media,
                             beforeSend: function(xhr){
-                                xhr.setRequestHeader('X-WP-NOUNCE', objphotos.restNounce);
+                                xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
                             },
                             data: {},
     
-                            success: function( mediaresponse){  
+                            success: function( mediaResponse){  
                               
                                 if(i%2 == 0){
                                     $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                    mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
-                                    mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                    mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
-                                    element.link + '"><img src="' + objphotos.restURL + 
+                                    element.link + '"><img src="' + objPhotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
                                     element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }else{
                                     $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
-                                    mediaresponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaresponse.id + '" ><a href="' + 
-                                    mediaresponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objphotos.restURL + 
+                                    mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                    mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
-                                    element.link + '"><img src="' + objphotos.restURL + 
+                                    element.link + '"><img src="' + objPhotos.restURL + 
                                     '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
                                     element.title.rendered + '</p><p class="hover-categorie">' + $('.categories option[value="' + element.categorie + '"]').text() + '</p></li>');
                                 }
@@ -315,13 +320,13 @@ $('body').on('click', '.button-show-more', function (e) {
     
                         let button = document.querySelector('.button-show-more'); 
                         /* remove , at begin and at end of string */
-                        if(photosids.substring(0,1) === ','){
-                            photosids=photosids.substring(1, photosids.length);
+                        if(photosIds.substring(0,1) === ','){
+                            photosIds=photosIds.substring(1, photosIds.length);
                         }
-                        if(photosids.substring(photosids.length-1, photosids.length) === ','){
-                            photosids=photosids.substring(0, photosids.length-1);
+                        if(photosIds.substring(photosIds.length-1, photosIds.length) === ','){
+                            photosIds=photosIds.substring(0, photosIds.length-1);
                         }
-                        button.dataset.photosid = photosids;
+                        button.dataset.photosId = photosIds;
                         
                     });
                     
@@ -330,9 +335,7 @@ $('body').on('click', '.button-show-more', function (e) {
                 }
             },
         });
-    }
-
-    
+    } 
 
 });
 
@@ -393,23 +396,26 @@ $('body').on('click', '.categories ul li', function(){
     $('.categories ul li.selected').removeClass('selected');
     $(this).addClass('selected');
     $('.categories ul').hide();
-    let categorie_id ="";
-    let format_id="";
-    let filter_id="";
+    let categorieId ="";
+    let formatId="";
+    let filterId="";
     if($('.categories ul li').hasClass('selected')){
-        let categorie_html_id=$('.categories ul li.selected').attr('id');
-        categorie_id = parseInt(categorie_html_id.substring(4, categorie_html_id.length));
+        let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        categorieId = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
     }
     if($('.formats ul li').hasClass('selected')){
-        let format_html_id=$('.formats ul li.selected').attr('id');
-        format_id = parseInt(format_html_id.substring(7, format_html_id.length));
+        let formatHtmlId=$('.formats ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        formatId = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
     }
     if($('.filter ul li').hasClass('selected')){
-    let filter_html_id=$('.filter ul li.selected').attr('id');
-    filter_id = parseInt(filter_html_id.substring(4, filter_html_id.length));
+    let filterHtmlId=$('.filter ul li.selected').attr('id');
+    /* extract number id from html attribute id */
+    filterId = parseInt(filterHtmlId.substring(6, filterHtmlId.length));
     }
     if($('.categories ul li').hasClass('selected') || $('.formats ul li').hasClass('selected') || $('.filter ul li').hasClass('selected')){
-        filterPhoto(categorie_id, format_id, filter_id); 
+        filterPhoto(categorieId, formatId, filterId); 
     }
 });
 
@@ -417,23 +423,26 @@ $('body').on('click', '.formats ul li', function(){
     $('.formats ul li.selected').removeClass('selected');
     $(this).addClass('selected');
     $('.formats ul').hide();
-    let categorie_id ="";
-    let format_id="";
-    let filter_id="";
+    let categorieId ="";
+    let formatId="";
+    let filterId="";
     if($('.categories ul li').hasClass('selected')){
-        let categorie_html_id=$('.categories ul li.selected').attr('id');
-        categorie_id = parseInt(categorie_html_id.substring(4, categorie_html_id.length));
+        let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        categorieId = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
     }
     if($('.formats ul li').hasClass('selected')){
-        let format_html_id=$('.formats ul li.selected').attr('id');
-        format_id = parseInt(format_html_id.substring(7, format_html_id.length));
+        let formatHtmlId=$('.formats ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        formatId = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
     }
     if($('.filter ul li').hasClass('selected')){
-        let filter_html_id=$('.filter ul li.selected').attr('id');
-        filter_id = parseInt(filter_html_id.substring(4, filter_html_id.length));
+        let filterHtmlId=$('.filter ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        filterId = parseInt(filterHtmlId.substring(6, filterHtmlId.length));
     }
     if($('.categories ul li').hasClass('selected') || $('.formats ul li').hasClass('selected') || $('.filter ul li').hasClass('selected')){
-        filterPhoto(categorie_id, format_id, filter_id); 
+        filterPhoto(categorieId, formatId, filterId); 
     }
 });
 
@@ -441,38 +450,29 @@ $('body').on('click', '.filter ul li', function(){
     $('.filter ul li.selected').removeClass('selected');
     $(this).addClass('selected');
     $('.filter ul').hide();
-    let categorie_id ="";
-    let format_id="";
-    let filter_id="";
+    let categorieId ="";
+    let formatId="";
+    let filterId="";
     if($('.categories ul li').hasClass('selected')){
-        let categorie_html_id=$('.categories ul li.selected').attr('id');
-        categorie_id = categorie_html_id.substring(4, categorie_html_id.length);
+        let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        categorieId = categorieHtmlId.substring(4, categorieHtmlId.length);
     }
     if($('.formats ul li').hasClass('selected')){
-        let format_html_id=$('.formats ul li.selected').attr('id');
-        format_id = format_html_id.substring(7, format_html_id.length);
+        let formatHtmlId=$('.formats ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        formatId = formatHtmlId.substring(7, formatHtmlId.length);
     }
     if($('.filter ul li').hasClass('selected')){
-    let filter_html_id=$('.filter ul li.selected').attr('id');
-        filter_id = filter_html_id.substring(4, filter_html_id.length);
+        let filterHtmlId=$('.filter ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        filterId = filterHtmlId.substring(6, filterHtmlId.length);
     }
     if($('.categories ul li').hasClass('selected') || $('.formats ul li').hasClass('selected') || $('.filter ul li').hasClass('selected')){
-        filterPhoto(categorie_id, format_id, filter_id); 
+        filterPhoto(categorieId, formatId, filterId); 
     }
     
 });
-
-let i =0;
-let c2 = $('.header nav div').html();
-$('.burger-content').append('<div>' + c2 + '</div>').hide();
-
-$('.burger').click(function(){
-    
-    $('.burger .line').toggle();
-    $('.burger .burger-close').toggle();
-    $('.burger-content').toggle( i++ %2 === 0);  
-});
-
 
 
 });

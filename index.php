@@ -51,8 +51,8 @@ echo '</ul></div>
     <div class="filter"><span>Trier par</span>
     <div class="arrow-down"><</div>
     <ul>
-    <li id="tri-asc" style="accent-color: yellow;">Date croissante</li>
-    <li id="tri-desc">Date décroissante</li>
+    <li id="order-asc" style="accent-color: yellow;">Date croissante</li>
+    <li id="order-desc">Date décroissante</li>
     </ul></div>
     </div>
     <div class="diaporama">';

@@ -10,31 +10,31 @@ jQuery(document).ready(function($){
     function showLightbox(url){
     
     $('.lightbox-loader').html('');
-        let listPhoto = $('button[data-photosid]').data('photosid');
+        let listPhoto = $('button[data-photosId]').data('photosId');
         listPhoto = listPhoto.toString(); 
         let nbPhoto= listPhoto.split(',').length;
-        let linkPhotoElem = $("a.fullscreen");
-        let titlePhotoElem = $("p.hover-title");
-        let categoriePhotoElem = $("p.hover-categorie");
+        let linkPhoto = $("a.fullscreen");
+        let titlePhoto = $("p.hover-title");
+        let categoriePhoto = $("p.hover-categorie");
         let j=0;
-        $.each(linkPhotoElem, function (key, value) {
+        $.each(linkPhoto, function (key, value) {
             
             if(url == value.href){
                 if(j-1 >= '0'){
                     $('.nav-prev').show();
-                    $('.nav-prev').attr("href", linkPhotoElem[j - 1].href);
+                    $('.nav-prev').attr("href", linkPhoto[j - 1].href);
                 }else{
                     $('.nav-prev').hide();
                 }
                 if(j +1 < nbPhoto){
                     $('.nav-next').show();
-                    $('.nav-next').attr("href", linkPhotoElem[j + 1].href);
+                    $('.nav-next').attr("href", linkPhoto[j + 1].href);
                 }else{
                     $('.nav-next').hide();
                 }
                 $('.lightbox-loader').prepend('<figure><img src="' + value.href + 
-                '" alt="' + titlePhotoElem[key].innerHTML + '"><figcaption><h2 class="title-lightbox">' + titlePhotoElem[key].innerHTML + 
-                '</h2><h3 class="categorie-lightbox">' + categoriePhotoElem[key].innerHTML + '</h3></figcaption></figure>');   
+                '" alt="' + titlePhoto[key].innerHTML + '"><figcaption><h2 class="title-lightbox">' + titlePhoto[key].innerHTML + 
+                '</h2><h3 class="categorie-lightbox">' + categoriePhoto[key].innerHTML + '</h3></figcaption></figure>');   
             }
             j++
         });

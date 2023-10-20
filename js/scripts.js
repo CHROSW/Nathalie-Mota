@@ -154,7 +154,7 @@ $('.button-show-all').click(function (e) {
     $(this).hide();
     let categorie=$('.single-photo-text p').eq(1).text();
     let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
-    let filterPhotosIds='';
+    let firstPhotosIds=$(this).data('photosid');
     $.ajax({
         type: 'GET',
         url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postid') + ',' + $(this).data('navid') + ',' + $(this).data('photosid') + '&categorie=' + $(this).data('categorie'),
@@ -167,7 +167,7 @@ $('.button-show-all').click(function (e) {
                 let i=0;  
                 response.forEach(function (element){
                     /* string contain list id separate by , */
-                    filterPhotosIds =  element.id + "," + filterPhotosIds ;
+                    firstPhotosIds =  element.id + "," + firstPhotosIds ;
 
                     $.ajax({
                         type: 'GET',
@@ -202,13 +202,13 @@ $('.button-show-all').click(function (e) {
 
                     let button = document.querySelector('.button-show-all');
                     /* remove , at begin and at end of string */
-                    if(filterPhotosIds.substring(0,1) == ','){
-                        filterPhotosIds=filterPhotosIds.substring(1, filterPhotosIds.length);
+                    if(firstPhotosIds.substring(0,1) == ','){
+                        firstPhotosIds=firstPhotosIds.substring(1, firstPhotosIds.length);
                     }
-                    if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) == ','){
-                        filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
+                    if(firstPhotosIds.substring(firstPhotosIds.length-1, firstPhotosIds.length) == ','){
+                        firstPhotosIds=firstPhotosIds.substring(0, firstPhotosIds.length-1);
                     }
-                    button.dataset.photosid = filterPhotosIds.substring(1,filterPhotosIds.length);
+                    button.dataset.photosid = firstPhotosIds;
 
                 
                     

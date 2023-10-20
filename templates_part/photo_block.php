@@ -81,30 +81,34 @@ if ( isset($the_query) && $the_query->have_posts()) {
         $ids=get_the_ID().','.$ids;
 	}
 	echo '</ul>';
+
+    
+
+
 } else {
 	esc_html_e( 'Sorry, no posts matched.' );
 }
+
 /* button display after list image */
 if(is_single($post_id)){
-    $nav_id = (isset($next) ? $next : ( (isset($prev) ? $prev : '' )));
     echo '<div class="area-button-more">
         <button
         class="button-show-all"
-        data-postId="' . $post_id . '"
-        data-navId="' . $nav_id . '"
-        data-photosId="' . substr($ids,0, strlen($ids)-1) . '"
+        data-postid="' . $post_id . '"
+        data-navid="' . (isset($next) ? $next : ( (isset($prev) ? $prev : '' ))) . '"
+        data-photosid="' . (isset($ids) ? substr($ids,0, strlen($ids)-1) : '') . '"
         data-categorie="' . $categorie[0]->term_id .'"
         data-nonce="' . wp_create_nonce('load_photos') . '"
         data-action="load_photos"
         data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"
         >Toutes les photos</button>
         </div>';
-    
+
 }elseif(is_home()){
     echo '<div class="area-button-more">
         <button class="button-show-more"
-        data-postId="' . $post_id . '"
-        data-photosId="' . substr($ids,0, strlen($ids)-1) . '"
+        data-postid="' . $post_id . '"
+        data-photosid="' . substr($ids,0, strlen($ids)-1) . '"
         data-nonce="' . wp_create_nonce('load_photos') . '"
         data-action="load_photos"
         data-ajaxurl="' . admin_url( 'admin-ajax.php' ) . '"

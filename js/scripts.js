@@ -70,14 +70,14 @@ function filterPhoto(categorie, format, order){
         paramUrl="";
     }
     let buttonShow = document.querySelector('.button-show-more');
-    buttonShow.dataset.photosId = ''; 
+    buttonShow.dataset.photosid = ''; 
     let filterPhotosIds='';
 
     $.ajax({
 
         
         type: 'GET',
-        url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $('.button-show-more').data('postId') + paramUrl,
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $('.button-show-more').data('postid') + paramUrl,
         beforeSend: function(xhr){
             xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
         },
@@ -132,7 +132,7 @@ function filterPhoto(categorie, format, order){
                     if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) === ','){
                         filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
                     }
-                    button.dataset.photosId = filterPhotosIds.substring(1,filterPhotosIds.length);
+                    button.dataset.photosid = filterPhotosIds.substring(1,filterPhotosIds.length);
                     
                 });
     
@@ -154,9 +154,10 @@ $('.button-show-all').click(function (e) {
     $(this).hide();
     let categorie=$('.single-photo-text p').eq(1).text();
     let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
+    let filterPhotosIds='';
     $.ajax({
         type: 'GET',
-        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postId') + ',' + $(this).data('navId') + ',' + $(this).data('photosId') + '&categorie=' + $(this).data('categorie'),
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postid') + ',' + $(this).data('navid') + ',' + $(this).data('photosid') + '&categorie=' + $(this).data('categorie'),
         beforeSend: function(xhr){
             xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
         },
@@ -201,13 +202,13 @@ $('.button-show-all').click(function (e) {
 
                     let button = document.querySelector('.button-show-all');
                     /* remove , at begin and at end of string */
-                    if(filterPhotosIds.substring(0,1) === ','){
+                    if(filterPhotosIds.substring(0,1) == ','){
                         filterPhotosIds=filterPhotosIds.substring(1, filterPhotosIds.length);
                     }
-                    if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) === ','){
+                    if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) == ','){
                         filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
                     }
-                    button.dataset.photosId = filterPhotosIds.substring(1,filterPhotosIds.length);
+                    button.dataset.photosid = filterPhotosIds.substring(1,filterPhotosIds.length);
 
                 
                     
@@ -233,17 +234,20 @@ $('body').on('click', '.button-show-more', function (e) {
     let order="";
     if($('.categories ul li').hasClass('selected')){
         let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        /* extract number id from html attribute id */
         categorie = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
     }
     if($('.formats ul li').hasClass('selected')){
         let formatHtmlId=$('.formats ul li.selected').attr('id');
+        /* extract number id from html attribute id */
         format = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
     }
     if($('.filter ul li').hasClass('selected')){
     let filterHtmlId=$('.filter ul li.selected').attr('id');
-    order = parseInt(filterHtmlId.substring(4, filterHtmlId.length));
+    /* extract number id from html attribute id */
+    order = parseInt(filterHtmlId.substring(6, filterHtmlId.length));
     }
-
+    /* check param value and determine param used */
     if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
         paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
     }else if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order != 'asc' && order != 'desc')){
@@ -263,14 +267,14 @@ $('body').on('click', '.button-show-more', function (e) {
     }
 
     let buttonshow = document.querySelector('.button-show-more');
-    let photosIds= buttonshow.dataset.photosId;
+    let photosIds= buttonshow.dataset.photosid;
     
     if((photosIds.split(",").length %12) != 0){
         alert("Il n'y a pas plus de photos.");
     }else{
         $.ajax({
             type: 'GET',
-            url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postId') + ',' + photosIds + paramUrl,
+            url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosIds + paramUrl,
             beforeSend: function(xhr){
                 xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
             },
@@ -320,13 +324,13 @@ $('body').on('click', '.button-show-more', function (e) {
     
                         let button = document.querySelector('.button-show-more'); 
                         /* remove , at begin and at end of string */
-                        if(photosIds.substring(0,1) === ','){
+                        if(photosIds.substring(0,1) == ','){
                             photosIds=photosIds.substring(1, photosIds.length);
                         }
-                        if(photosIds.substring(photosIds.length-1, photosIds.length) === ','){
+                        if(photosIds.substring(photosIds.length-1, photosIds.length) == ','){
                             photosIds=photosIds.substring(0, photosIds.length-1);
                         }
-                        button.dataset.photosId = photosIds;
+                        button.dataset.photosid = photosIds;
                         
                     });
                     

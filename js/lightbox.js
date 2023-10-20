@@ -10,7 +10,7 @@ jQuery(document).ready(function($){
     function showLightbox(url){
     
     $('.lightbox-loader').html('');
-        let listPhoto = $('button[data-photosId]').data('photosId');
+        let listPhoto = $('body').find('button[data-photosid]').data('photosid');
         listPhoto = listPhoto.toString(); 
         let nbPhoto= listPhoto.split(',').length;
         let linkPhoto = $("a.fullscreen");
@@ -49,12 +49,12 @@ $("body").on("click", 'a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]'
     showLightbox($(this).attr('href'));
 });
 
-$('.nav-prev').click( function(e){
+$('.lightbox .nav-prev').click( function(e){
     e.preventDefault();
     showLightbox($(this).attr('href'));
 });
 
-$('.nav-next').click( function(e){
+$('.lightbox .nav-next').click( function(e){
     e.preventDefault();  
     showLightbox($(this).attr('href'));
 });

@@ -71,7 +71,7 @@ while ( have_posts() ) :
 		</div>
 		</div>
 		</article>";
-endwhile; 
+endwhile;
 /* section list image */
 echo '<div class="diaporama">
 	<h3 class="diaporama-title">Vous aimeriez aussi</h3>';

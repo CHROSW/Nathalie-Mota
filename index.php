@@ -6,19 +6,7 @@ $hero_query = new WP_Query(
         'orderby' => 'rand',
     )
 );
-/* taxonomy list by taxonomy name */ 
-$categories = get_terms(
-    array(
-        'taxonomy' => 'categorie',
-        'hide_empty' => false,
-    )
-);
-$formats = get_terms(
-    array(
-        'taxonomy' => 'format',
-        'hide_empty' => false,
-    )
-);
+
 
 get_header();
 /* hero section */
@@ -37,6 +25,21 @@ echo '</section>
     <div class="categories"><span>Catégories</span>
     <div class="arrow-down"><</div>
     <ul>';
+
+/* taxonomy list by taxonomy name */ 
+$categories = get_terms(
+    array(
+        'taxonomy' => 'categorie',
+        'hide_empty' => false,
+    )
+);
+$formats = get_terms(
+    array(
+        'taxonomy' => 'format',
+        'hide_empty' => false,
+    )
+);
+
 for($i=0; $i < count($categories); $i++){
 echo '<li  id="cat-' . $categories[$i]->term_id . '">' . $categories[$i]->name . '</li>';
 }

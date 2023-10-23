@@ -51,7 +51,7 @@ while ( have_posts() ) :
 	echo "<div class='single-photo-contact'>
 		<div class='single-photo-contact-left'>
 		<p>Cette photo vous intéresse ?</p>
-		<button id='contactModalBtn'>Contact</button>
+		<button class='contactModalBtn'>Contact</button>
 		</div>
 		<div class='single-photo-contact-right'>
 		<div class='single-photo-nav'>";

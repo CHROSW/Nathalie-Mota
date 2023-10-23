@@ -5,8 +5,12 @@ var modal = document.getElementById('contactModal');
 // Get the <span> element that closes the modal
 var span = document.getElementsByClassName("close")[0];
 
+//link with contact identified by tag li id on wordpress menu  
+$('#menu-item-64 a').addClass('contactModalBtn');
+
 // When the user clicks on the button, open the modal
-$('#contactModalBtn').click( function() {
+$('.contactModalBtn').click( function(e) {
+    e.preventDefault();
     modal.style.display = "block";
 });
 
@@ -150,7 +154,7 @@ function filterPhoto(categorie, format, order){
 }
 
 
-$('.button-show-all').click(function (e) {
+$('body').on('click', '.button-show-all', function (e) {
     $(this).hide();
     let categorie=$('.single-photo-text p').eq(1).text();
     let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);

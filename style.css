@@ -920,6 +920,26 @@ p{
 
 
 @media((min-width: 375px) and (max-width: 799px)){
+
+
+    @-webkit-keyframes moveInRight {
+        0% {
+            transform: translateX(-100vw);
+        }
+        100% {
+            transform: translateX(0vw);
+        }
+    }
+    
+    @keyframes moveInRight {
+        0% {
+            transform: translateX(-100vw);
+        }
+        100% {
+            transform: translateX(0vw);
+        }
+    }
+
     .header a img{
         padding-left: 28.67px;
     }
@@ -949,7 +969,7 @@ p{
         width: 27.42px;
         position: relative;
         z-index: 100;
-        cursor: pointer;
+        cursor: pointer;  
     }
 
     .header .burger-content div{
@@ -960,6 +980,14 @@ p{
         width:100vw;
         height:100vh;
         z-index: 1000;
+        -webkit-animation-name: moveInRight;
+        animation-name: moveInRight;
+        -webkit-animation-iteration-count: 1;
+        animation-iteration-count: 1;
+        -webkit-animation-timing-function: ease-in;
+        animation-timing-function: ease-in;
+        -webkit-animation-duration: 0.5s;
+        animation-duration: 0.5s;
     }
     .header .burger-content div ul{ 
         display: flex;

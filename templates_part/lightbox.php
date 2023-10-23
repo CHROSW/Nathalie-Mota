@@ -10,6 +10,7 @@
         </svg>Précédent
     </a>
     <div class='lightbox-loader'>
+        <div id="html-spinner"></div>
     </div>
     <a class="nav-next" href="#">
         Suivant

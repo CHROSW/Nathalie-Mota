@@ -241,6 +241,24 @@ p{
     bottom: 142px;
 }
 
+@-webkit-keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
 .diaporama{
     display: flex;
     flex-direction: row;
@@ -282,6 +300,14 @@ p{
     list-style: none;
     flex-basis: 0;
     margin-bottom: 20px;
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 
@@ -290,6 +316,14 @@ p{
     list-style: none;
     flex-basis: 0;
     margin-bottom: 20px;
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 .diaporama ul li.photo-left img, .diaporama ul li.photo-right img{

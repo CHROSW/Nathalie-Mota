@@ -83,6 +83,43 @@ p{
     margin: 7px 410px 0px 410px;
 }
 
+
+@-webkit-keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+@-webkit-keyframes scaling-hero-anim {
+    from {
+      transform: scale(1.01);
+    }
+    to {
+      transform: scale(1);
+    }
+}
+
+@keyframes scaling-hero-anim {
+    from {
+      transform: scale(1.01);
+    }
+    to {
+      transform: scale(1);
+    }
+}
+
 .single-photo{
     width: 1440px;
     display: flex;
@@ -96,6 +133,14 @@ p{
     height:844px;
     object-fit: cover;
     margin: 38px 146px 8px 0px;
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
 }
 
 .single-photo-text{
@@ -211,6 +256,14 @@ p{
 .hero{
     margin: auto;
     width: 1440px;
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
 }
 
 .hero h2{
@@ -231,6 +284,14 @@ p{
     color:transparent;
     -webkit-text-stroke: 2px ;
     -webkit-text-stroke-color: white;
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 2s;
+    animation-duration: 2s;
 }
 
 .hero img{
@@ -239,25 +300,11 @@ p{
     height: 962px;
     position: relative;
     bottom: 142px;
+    animation: scaling-hero-anim 4s 0.25s cubic-bezier(0, 0.71, 0.4, 0.97) forwards;
+    -webkit-animation: scaling-hero-anim 4s 0.25s cubic-bezier(0, 0.71, 0.4, 0.97) forwards;
 }
 
-@-webkit-keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 
-@keyframes fadeInOpacity {
-	0% {
-		opacity: 0;
-	}
-	100% {
-		opacity: 1;
-	}
-}
 
 .diaporama{
     display: flex;

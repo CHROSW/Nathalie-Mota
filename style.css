@@ -383,11 +383,19 @@ p{
 
 .diaporama ul li:hover img.wp-post-image{
     filter:brightness(30%);
+    transition: filter linear 0.5s;
 }
 
 .diaporama ul li:hover .fullscreen img, .diaporama ul li:hover .eye img, .diaporama ul li:hover .hover-title, .diaporama ul li:hover .hover-categorie{
     display:block;
-
+    -webkit-animation-name: fadeInOpacity;
+    animation-name: fadeInOpacity;
+    -webkit-animation-iteration-count: 1;
+    animation-iteration-count: 1;
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.5s;
+    animation-duration: 0.5s;
 }
 
 .filter-nav{

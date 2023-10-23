@@ -9,6 +9,16 @@ Tags : openclassrooms
 Text Domain : Nathalie Mota
 */ 
 
+html{
+    margin-top: 0px !important;
+}
+
+@media screen and (max-width: 782px) {
+    html {
+        margin-top: 0px !important;
+    }
+}
+
 h1, h2, h3{
     font-family: 'Space Mono';
 }

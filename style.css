@@ -116,24 +116,6 @@ p{
 	}
 }
 
-@-webkit-keyframes scaling-hero-anim {
-    from {
-      transform: scale(1.01);
-    }
-    to {
-      transform: scale(1);
-    }
-}
-
-@keyframes scaling-hero-anim {
-    from {
-      transform: scale(1.01);
-    }
-    to {
-      transform: scale(1);
-    }
-}
-
 .single-photo{
     width: 1440px;
     display: flex;
@@ -314,8 +296,6 @@ p{
     height: 962px;
     position: relative;
     bottom: 142px;
-    animation: scaling-hero-anim 4s 0.25s cubic-bezier(0, 0.71, 0.4, 0.97) forwards;
-    -webkit-animation: scaling-hero-anim 4s 0.25s cubic-bezier(0, 0.71, 0.4, 0.97) forwards;
 }
 
 
@@ -912,13 +892,16 @@ p{
 
 .modal-header h2{
     font-weight:400;
-    width:597px;
-    overflow-wrap: anywhere;
+    width:553px;
     font-family: 'space Mono';
-    font-size: 66px;
+    font-size: 67px;
     font-style: italic;
-    margin:0px 0px 0px 4px;
+    margin:18px 0px 0px 0px;
     line-height: 53px;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    padding-left: 44px;
 }
 
 /* Modal Body */
@@ -1341,10 +1324,11 @@ p{
 
     .modal-header h2{
         height:55px;
-        width: 286px;
-        font-size: 32px;
+        width: 268px;
+        font-size: 35px;
         line-height: 27px;
-        overflow-wrap: anywhere;
+        padding-left: 18px;
+        
     }
 
     .wpcf7-form.init p{

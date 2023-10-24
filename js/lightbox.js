@@ -10,9 +10,6 @@ jQuery(document).ready(function($){
     function showLightbox(url){
     
     $('.lightbox-loader').html(''); 
-        let listPhoto = $('button[data-photosid]').data('photosid');
-        listPhoto = listPhoto.toString();
-        let nbPhoto= listPhoto.split(',').length;
         let linkPhoto = $("a.fullscreen");
         let titlePhoto = $("p.hover-title");
         let categoriePhoto = $("p.hover-categorie");
@@ -26,7 +23,7 @@ jQuery(document).ready(function($){
                 }else{
                     $('.nav-prev').hide();
                 }
-                if(j +1 < nbPhoto){
+                if(j +1 < linkPhoto.length){
                     $('.nav-next').show();
                     $('.nav-next').attr("href", linkPhoto[j + 1].href);
                 }else{

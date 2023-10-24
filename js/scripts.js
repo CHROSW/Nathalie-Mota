@@ -46,9 +46,9 @@ $('.burger').click(function(){
 
 
 /** 
- * @param categorie custom term content name categorie for custom post photo on list select optional
- * @param format custom term content name format for custom post photo on list select optional
- * @param order photo order on list select optional 
+ * @param {int} categorie custom term content name categorie for custom post photo on list select optional
+ * @param {int} format custom term content name format for custom post photo on list select optional
+ * @param {string} order photo order on list select asc or desc optional 
  * 
  * @return html display
  * 
@@ -154,14 +154,23 @@ function filterPhoto(categorie, format, order){
 }
 
 
-$('body').on('click', '.button-show-all', function (e) {
-    $(this).hide();
-    let categorie=$('.single-photo-text p').eq(1).text();
-    let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
-    let firstPhotosIds=$(this).data('photosid');
+/**
+ * 
+ * @param {int} postId page post id already display to exclude required
+ * @param {int} navId post navigation id already display to exclude required
+ * @param {int} categorieId custom term categorie id to display required
+ * @param {string} categorieName custom term in categorie to display required
+ * @param {string} photosId photos id already display on page to exclude optional
+ * @param {string} firstPhotosIds button dataset list photos id already display optional
+ * 
+ * @return html display
+ * 
+ * function to display all photos into same custom term categorie
+ */
+function showAllPhotos(postId, navId, categorieId, categorieName, photosId, firstPhotosIds){
     $.ajax({
         type: 'GET',
-        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  $(this).data('postid') + ',' + $(this).data('navid') + ',' + $(this).data('photosid') + '&categorie=' + $(this).data('categorie'),
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  postId + ',' + navId + ',' + photosId + '&categorie=' + categorieId,
         beforeSend: function(xhr){
             xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
         },
@@ -227,30 +236,21 @@ $('body').on('click', '.button-show-all', function (e) {
         }
 
     });
- 
-    
-});
+}
 
 
-$('body').on('click', '.button-show-more', function (e) {
-    let categorie="";
-    let format="";
-    let order="";
-    if($('.categories ul li').hasClass('selected')){
-        let categorieHtmlId=$('.categories ul li.selected').attr('id');
-        /* extract number id from html attribute id */
-        categorie = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
-    }
-    if($('.formats ul li').hasClass('selected')){
-        let formatHtmlId=$('.formats ul li.selected').attr('id');
-        /* extract number id from html attribute id */
-        format = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
-    }
-    if($('.filter ul li').hasClass('selected')){
-    let filterHtmlId=$('.filter ul li.selected').attr('id');
-    /* extract number id from html attribute id */
-    order = parseInt(filterHtmlId.substring(6, filterHtmlId.length));
-    }
+/**
+ * 
+ * @param {int} postId page post id to exclude required
+ * @param {int} categorie custom term id into custom term categorie optional
+ * @param {int} format custom term id into custom term format optional
+ * @param {string} order order to display asc or desc optional
+ * 
+ * @return html display
+ * 
+ * function to display 12 new photos at click on button
+ */
+function infinitePage(postId, categorie, format, order){
     /* check param value and determine param used */
     if((parseInt(categorie) %1 === 0) && (parseInt(format) %1 === 0) && (order == 'asc' || order == 'desc')){
         paramUrl='&categorie=' + categorie + '&format=' + format + '&orderby=date&order=' + order;
@@ -269,16 +269,16 @@ $('body').on('click', '.button-show-more', function (e) {
     }else{
         paramUrl="";
     }
-
+    
     let buttonshow = document.querySelector('.button-show-more');
     let photosIds= buttonshow.dataset.photosid;
-    
+
     if((photosIds.split(",").length %12) != 0){
         alert("Il n'y a pas plus de photos.");
     }else{
         $.ajax({
             type: 'GET',
-            url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  $(this).data('postid') + ',' + photosIds + paramUrl,
+            url: objPhotos.restURL + 'wp/v2/photo?per_page=12&exclude=' +  postId + ',' + photosIds + paramUrl,
             beforeSend: function(xhr){
                 xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
             },
@@ -343,10 +343,48 @@ $('body').on('click', '.button-show-more', function (e) {
                 }
             },
         });
-    } 
+    }
+}
 
+
+/* to show all photos on single.php */
+$('body').on('click', '.button-show-all', function (e) {
+    $(this).hide();
+    let categorie=$('.single-photo-text p').eq(1).text();
+    let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
+    let firstPhotosIds=$(this).data('photosid');
+    let postId=$(this).data('postid');
+    let navId=$(this).data('navid');
+    let photosId=$(this).data('photosid');
+    let categorieId=$(this).data('categorie');
+    showAllPhotos(postId, navId, photosId, categorieId, categorieName, firstPhotosIds);
 });
 
+/* to show 12 new photos on infinite page*/
+$('body').on('click', '.button-show-more', function (e) {
+    let categorie="";
+    let format="";
+    let order="";
+    let postId=$(this).data('postid'); 
+    if($('.categories ul li').hasClass('selected')){
+        let categorieHtmlId=$('.categories ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        categorie = parseInt(categorieHtmlId.substring(4, categorieHtmlId.length));
+    }
+    if($('.formats ul li').hasClass('selected')){
+        let formatHtmlId=$('.formats ul li.selected').attr('id');
+        /* extract number id from html attribute id */
+        format = parseInt(formatHtmlId.substring(7, formatHtmlId.length));
+    }
+    if($('.filter ul li').hasClass('selected')){
+    let filterHtmlId=$('.filter ul li.selected').attr('id');
+    /* extract number id from html attribute id */
+    order = parseInt(filterHtmlId.substring(6, filterHtmlId.length));
+    }
+    infinitePage(postId, categorie, format, order);
+
+});
+/* to show submenu categorie on filter navigation */
 let j=0;
 $('.categories').click(function(){
     $('.categories ul').toggle();
@@ -364,6 +402,8 @@ $('.categories').click(function(){
         $('.categories .arrow-down').removeClass('arrow-up');
     }
 });
+
+/* to show submenu format on filter navigation */
 let k=0;
 $('.formats').click(function(){
     $('.formats ul').toggle();
@@ -381,6 +421,8 @@ $('.formats').click(function(){
         $('.formats .arrow-down').removeClass('arrow-up');
     }
 });
+
+/* to show submenu order on filter navigation */
 let l=0;
 $('.filter').click(function(){
     $('.filter ul').toggle();
@@ -399,7 +441,7 @@ $('.filter').click(function(){
     }
 });
 
-
+/* to select choice into categorie on filter navigation */
 $('body').on('click', '.categories ul li', function(){
     $('.categories ul li.selected').removeClass('selected');
     $(this).addClass('selected');
@@ -427,6 +469,7 @@ $('body').on('click', '.categories ul li', function(){
     }
 });
 
+/* to select choice into format on filter navigation */
 $('body').on('click', '.formats ul li', function(){
     $('.formats ul li.selected').removeClass('selected');
     $(this).addClass('selected');
@@ -454,6 +497,7 @@ $('body').on('click', '.formats ul li', function(){
     }
 });
 
+/* to select choice into order on filter navigation */
 $('body').on('click', '.filter ul li', function(){
     $('.filter ul li.selected').removeClass('selected');
     $(this).addClass('selected');

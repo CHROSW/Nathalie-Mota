@@ -1,7 +1,7 @@
 jQuery(document).ready(function($){
 
     /**
-     * @param url link image to show required
+     * @param {string} url link image to show required
      * 
      * @return html display
      * 
@@ -39,23 +39,25 @@ jQuery(document).ready(function($){
     
 
     }
-
+/* to show lightbox on hover image*/
 $("body").on("click", 'a.fullscreen[href$=".jpeg"], a.fullscreen[href$=".jpeg"]', function(e){
     e.preventDefault();
     $('.lightbox').show();
     showLightbox($(this).attr('href'));
 });
 
+/* to previous photo on lightbox navigation */
 $('.lightbox .nav-prev').click( function(e){
     e.preventDefault();
     showLightbox($(this).attr('href'));
 });
 
+/* to next photo on lightbox navigation */
 $('.lightbox .nav-next').click( function(e){
     e.preventDefault();    
     showLightbox($(this).attr('href'));
 });
-
+/* to close lightbox */
 $('.lightbox-close').click( function(e){
     $('.lightbox').hide();
 });

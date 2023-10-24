@@ -357,7 +357,7 @@ $('body').on('click', '.button-show-all', function (e) {
     let navId=$(this).data('navid');
     let photosId=$(this).data('photosid');
     let categorieId=$(this).data('categorie');
-    showAllPhotos(postId, navId, photosId, categorieId, categorieName, firstPhotosIds);
+    showAllPhotos(postId, navId, categorieId, categorieName,photosId, firstPhotosIds);
 });
 
 /* to show 12 new photos on infinite page*/

@@ -170,6 +170,7 @@ function filterPhoto(categorie, format, order){
  * @param {int} postId page post id already display to exclude required
  * @param {int} navId post navigation id already display to exclude required
  * @param {int} categorieId custom term categorie id to display required
+ * @param {string} categorieName custom term in categorie to display required
  * 
  * @return html display
  * 

@@ -1,4 +1,18 @@
 jQuery(document).ready(function($){
+
+/* add nav menu at burger menu on load page and hide this*/
+let i =0;
+let c2 = $('.header nav div').html();
+$('.burger-content').append('<div>' + c2 + '</div>').hide();
+$('.burger-content div ul li#menu-item-64 a').addClass('contactModalBtn');
+$('.burger').click(function(){
+    
+    $('.burger .line').toggle();
+    $('.burger .burger-close').toggle();
+    $('.burger-content').toggle( i++ %2 === 0);  
+});
+
+
 // Get the modal
 var modal = document.getElementById('contactModal');
 
@@ -10,6 +24,11 @@ $('#menu-item-64 a').addClass('contactModalBtn');
 
 // When the user clicks on the button, open the modal
 $('.contactModalBtn').click( function(e) {
+    e.preventDefault();
+    modal.style.display = "block";
+});
+
+$('body .burger-content div ul li .contactModalBtn').on('click', function(){
     e.preventDefault();
     modal.style.display = "block";
 });
@@ -32,23 +51,14 @@ let refDisplay = refPhoto.substring(refPhoto.indexOf(':')+1, refPhoto.length);
 $('.wpcf7-form-control-wrap input').eq(2).val(refDisplay);
 
 
-/* add nav menu at burger menu on load page and hide this*/
-let i =0;
-let c2 = $('.header nav div').html();
-$('.burger-content').append('<div>' + c2 + '</div>').hide();
 
-$('.burger').click(function(){
-    
-    $('.burger .line').toggle();
-    $('.burger .burger-close').toggle();
-    $('.burger-content').toggle( i++ %2 === 0);  
-});
 
 
 /** 
  * @param {int} categorie custom term content name categorie for custom post photo on list select optional
  * @param {int} format custom term content name format for custom post photo on list select optional
  * @param {string} order photo order on list select asc or desc optional 
+ * @param {string} categorieName custom term in categorie to display required
  * 
  * @return html display
  * 
@@ -95,7 +105,7 @@ function filterPhoto(categorie, format, order){
                 response.forEach(function (element){
                    /* string contain list id separate by , */
                     filterPhotosIds =    filterPhotosIds + "," + element.id;
-
+                    
                     $.ajax({
                         type: 'GET',
                         url: objPhotos.restURL + 'wp/v2/media/' + element.featured_media,
@@ -129,6 +139,7 @@ function filterPhoto(categorie, format, order){
                     });
 
                     let button = document.querySelector('.button-show-more');
+                    
                     /* remove , at begin and at end of string */
                     if(filterPhotosIds.substring(0,1) === ','){
                         filterPhotosIds=filterPhotosIds.substring(1, filterPhotosIds.length);
@@ -136,7 +147,8 @@ function filterPhoto(categorie, format, order){
                     if(filterPhotosIds.substring(filterPhotosIds.length-1, filterPhotosIds.length) === ','){
                         filterPhotosIds=filterPhotosIds.substring(0, filterPhotosIds.length-1);
                     }
-                    button.dataset.photosid = filterPhotosIds.substring(1,filterPhotosIds.length);
+
+                    button.dataset.photosid = filterPhotosIds;
                     
                 });
     
@@ -152,6 +164,104 @@ function filterPhoto(categorie, format, order){
 
     });
 }
+
+/**
+ * 
+ * @param {int} postId page post id already display to exclude required
+ * @param {int} navId post navigation id already display to exclude required
+ * @param {int} categorieId custom term categorie id to display required
+ * 
+ * @return html display
+ * 
+ * function to display two random photos into same custom term categorie
+ */
+function showTwoRandomPhotos(postId, navId, categorieId, categorieName){
+    
+    $.ajax({
+        type: 'GET',
+        url: objPhotos.restURL + 'wp/v2/photo?per_page=100&exclude=' +  postId + ',' + navId + '&categorie=' + categorieId,
+        beforeSend: function(xhr){
+            xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
+        },
+        data: {},
+        success: function (response) {
+            if(response){
+                let i=0; /* indice des images affichées */ 
+                let j=0; /* indice des images random à trier */
+                let firstPhotosIds="";
+                let id_rand = Math.floor(Math.random() * response.length);
+                let id_rand2=Math.floor(Math.random() * response.length);
+                while(id_rand === id_rand2){
+                    id_rand2=Math.floor(Math.random() * response.length);
+                }
+               
+                response.forEach(function (element){
+                    
+
+                    
+
+                    if(j == id_rand || j == id_rand2){
+                        
+                    /* string contain list id separate by , */
+                    firstPhotosIds =  element.id + "," + firstPhotosIds ;
+                    
+                        $.ajax({
+                            type: 'GET',
+                            url: objPhotos.restURL + 'wp/v2/media/' + element.featured_media,
+                            beforeSend: function(xhr){
+                                xhr.setRequestHeader('X-WP-NOUNCE', objPhotos.restNounce);
+                            },
+                            data: {},
+
+                            success: function( mediaResponse){  
+
+
+                                if(i%2 == 0){
+                                    $('.diaporama ul').append('<li class="photo-left"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                    mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                    mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + 
+                                    element.link + '"><img src="' + objPhotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                    element.title.rendered + '</p><p class="hover-categorie">' + categorieName + '</p></li>');
+                                }else{
+                                    $('.diaporama ul').append('<li class="photo-right"><img class="attachment-large size-large wp-post-image" decoding="async" loading="lazy" src="' + 
+                                    mediaResponse.media_details.sizes.large.source_url + '" alt="photo-' + mediaResponse.id + '" ><a href="' + 
+                                    mediaResponse.media_details.sizes.full.source_url +  '" class="fullscreen"><img src="' + objPhotos.restURL + 
+                                    '../wp-content/themes/nathaliemota/images/Icon_fullscreen.png" alt="Lightbox Icon fullscreen"/></a><a class="eye" href="' + element.link + 
+                                    '"><img src="' + objPhotos.restURL + '../wp-content/themes/nathaliemota/images/Icon_eye.png" alt="Infos Icon eye"/></a><p class="hover-title">' + 
+                                    element.title.rendered + '</p><p class="hover-categorie">' + categorieName + '</p></li>');
+                                }
+                                i++;
+                            },
+                        });
+                    }
+
+                    let button = document.querySelector('.button-show-all');
+                    /* remove , at begin and at end of string */
+                    if(firstPhotosIds.substring(0,1) == ','){
+                        firstPhotosIds=firstPhotosIds.substring(1, firstPhotosIds.length);
+                    }
+                    if(firstPhotosIds.substring(firstPhotosIds.length-1, firstPhotosIds.length) == ','){
+                        firstPhotosIds=firstPhotosIds.substring(0, firstPhotosIds.length-1);
+                    }
+                    button.dataset.photosid = firstPhotosIds;
+
+                j++;
+                    
+                });     
+                
+            }
+        },
+        error: function(error){
+            $('.diaporama').html('');
+            $('.diaporama').append('<h3 class="diaporama-title">Vous aimeriez aussi</h3><ul><li style="list-style:none;margin:auto;margin-bottom:40px;">Sorry, no posts matched.</li></ul>');
+            console.log(error);
+        }
+
+    });
+}
+
 
 
 /**
@@ -345,6 +455,23 @@ function infinitePage(postId, categorie, format, order){
         });
     }
 }
+/* at loading page */
+
+    /* home page  or single page*/
+    if($('.filter-nav').text() != ""){
+    let categorie="";
+    let format="";
+    let order="";
+    filterPhoto(categorie,format,order);
+    }
+    if($('.button-show-all').text() != ""){
+        let postId=parseInt($('.button-show-all').data('postid'));
+        let navId=parseInt($('.button-show-all').data('navid'));
+        let categorieId=parseInt($('.button-show-all').data('categorie'));
+        let categorie=$('.single-photo-text p').eq(1).text();
+        let categorieName= categorie.substring(categorie.indexOf(':')+1, categorie.length);
+        showTwoRandomPhotos(postId, navId, categorieId, categorieName);
+    }
 
 
 /* to show all photos on single.php */
